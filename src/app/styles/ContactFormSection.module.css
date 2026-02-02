@@ -1,0 +1,279 @@
+:root {
+  --bg-dark: #000000;
+  --bg-card-1: #111111;
+  --bg-card-2: #151819;
+
+  --border-light: #776565;
+  --border-accent: #DDBCBC;
+
+  --text-white: #ffffff;
+  --text-muted: #b0b0b0;
+  --text-placeholder: #9b9b9b;
+
+  --radius: 10px;
+  --font: 'Inter', sans-serif;
+}
+
+/* ================= SECTION ================= */
+.contactSection {
+  background: var(--bg-dark);
+  padding: 100px 50px;
+  font-family: var(--font);
+  color: var(--text-white);
+}
+
+/* ================= TITLE ================= */
+.sectionTitleWrapper {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+.mainHeading {
+  font-size: 36px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+.subHeading {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* ================= LAYOUT ================= */
+.formContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+}
+
+/* ================= CUSTOM MODAL ================= */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--bg-card-1);
+  border: 2px solid var(--border-accent);
+  padding: 40px;
+  border-radius: var(--radius);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 30px rgba(221, 188, 188, 0.2);
+}
+
+.modalContent h3 {
+  color: var(--border-accent);
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.modalContent p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.closeBtn {
+  background: var(--border-accent);
+  color: #000;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+/* ================= DETAILS CARD ================= */
+.detailsCard {
+  flex: 1;
+  padding: 40px;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(var(--bg-card-1), var(--bg-card-2)),
+    linear-gradient(135deg, var(--border-light), var(--border-accent));
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.6s ease;
+}
+
+.detailsCard.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.detailsTitle {
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: var(--border-accent);
+}
+
+.detailItem {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.detailIcon {
+  width: 26px;
+  height: 26px;
+  color: var(--border-accent);
+  flex-shrink: 0;
+}
+
+.detailLabel {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.detailText p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--text-muted);
+}
+
+/* ================= FORM ================= */
+.inquiryForm {
+  flex: 2;
+  padding: 40px;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(var(--bg-card-2), var(--bg-dark)),
+    linear-gradient(135deg, var(--border-light), var(--border-accent));
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.6s ease;
+}
+
+.inquiryForm.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.formTitle {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+/* ================= INPUT GROUP ================= */
+.inputGroup {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  align-items: stretch;
+}
+
+/* ================= INPUTS ================= */
+.inputField,
+select.inputField,
+.textareaField {
+  width: 100%;
+  height: 52px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  background: #000;
+  color: var(--text-white);
+  border: 1px solid #2a2a2a;
+  font-size: 15px;
+}
+
+/* Placeholder */
+.inputField::placeholder,
+.textareaField::placeholder {
+  color: var(--text-placeholder);
+  opacity: 1;
+}
+
+/* Textarea */
+.textareaField {
+  height: auto;
+  min-height: 140px;
+  resize: vertical;
+  margin-bottom: 24px;
+}
+
+/* ================= SELECT DROPDOWN ================= */
+select.inputField {
+  appearance: none;
+  cursor: pointer;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--border-accent) 50%),
+    linear-gradient(135deg, var(--border-accent) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) 22px,
+    calc(100% - 16px) 22px;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+select.inputField option {
+  background: #000;
+  color: #fff;
+}
+
+/* ================= FOCUS ================= */
+.inputField:focus,
+.textareaField:focus,
+select.inputField:focus {
+  outline: none;
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 1px rgba(221, 188, 188, 0.35);
+}
+
+/* ================= BUTTON ================= */
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  background: linear-gradient(to right, var(--border-accent), var(--border-light));
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(221, 188, 188, 0.25);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .contactSection {
+    padding: 80px 20px;
+  }
+
+  .formContainer {
+    flex-direction: column;
+  }
+
+  .inputGroup {
+    flex-direction: column;
+  }
+
+  .detailsCard,
+  .inquiryForm {
+    transform: none;
+    opacity: 1;
+  }
+}

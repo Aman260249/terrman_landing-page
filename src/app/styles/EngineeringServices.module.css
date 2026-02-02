@@ -1,0 +1,235 @@
+/* styles/EngineeringServices.module.css */
+
+:root {
+    --white-text: #FFFFFF;
+    --dark-bg: #000000;
+    
+    /* Specified Background Gradient Colors */
+    --bg-color-1: #111111; 
+    --bg-color-2: #151819; 
+    --bg-color-3: #000000; 
+    
+    /* Specified Box Border Gradient Colors */
+    --border-color-1: #776565; 
+    --border-color-2: #DDBCBC; 
+    
+    --animation-duration: 0.7s;
+    --animation-easing: cubic-bezier(0.25, 1, 0.5, 1);
+    --card-radius: 10px; /* Consistent border radius */
+}
+
+/* --- Section Container (Relative for background positioning) --- */
+.servicesSection {
+    position: relative;
+    padding: 120px 50px;
+    color: var(--white-text);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; 
+}
+
+/* --- Background Image & Vertical Gradient Overlay --- */
+.sectionBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    
+    /* Dark vertical gradient + Image background */
+    background-image: 
+        linear-gradient(to top, rgba(0, 0, 0, 2.8), rgba(0, 0, 0, 0.7)), /* Dark vertical gradient */
+        url('/images/our-services-bg.jpg'); /* PLACEHOLDER: Use your image */ 
+        
+    background-size: cover;
+    background-position: center center;
+    background-color: var(--dark-bg);
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 1; 
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* --- Typography --- */
+.mainHeading {
+    font-size: clamp(48px, 10vw, 96px); 
+    font-weight: 700; 
+    line-height: 1.1;
+    margin-bottom: 70px;
+
+    /* Animation */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--animation-duration) var(--animation-easing), 
+                transform var(--animation-duration) var(--animation-easing);
+}
+
+.animatedText {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Cards Grid --- */
+.cardsGrid {
+    display: flex; 
+    justify-content: center;
+    align-items: stretch; /* Stretch cards to equal height if content allows */
+    gap: 30px;
+    flex-wrap: wrap; 
+}
+
+/* --- Individual Card Box (Gradient Border Fix Applied) --- */
+.cardBox {
+    text-decoration: none; /* For the <a> tag link */
+    color: inherit;
+    position: relative;
+    width: 320px; /* Fixed width */
+    padding: 30px;
+    min-height: 350px;
+    border-radius: var(--card-radius); /* Rounded corners */
+    cursor: pointer;
+    overflow: hidden;
+    
+    /* Gradient Border Fix: Multi-background layers */
+    background-image: 
+        linear-gradient(to bottom, var(--bg-color-1), var(--bg-color-2)), /* Dark Fill */
+        linear-gradient(to bottom right, var(--border-color-1), var(--border-color-2)); /* Gradient Border */
+
+    background-origin: border-box; 
+    background-clip: padding-box, border-box; 
+    border: 2px solid transparent; /* Transparent border allows gradient to show */
+    
+    /* Scroll Animation Initial State */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity var(--animation-duration) var(--animation-easing), 
+                transform 0.5s ease-out,
+                box-shadow 0.3s ease;
+}
+
+.cardBox.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Card Content --- */
+.cardTitle {
+    font-size: 32px;
+    font-weight: 600; 
+    color: var(--white-text);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.cardSubTitle {
+    font-size: 18px; 
+    font-weight: 400; 
+    line-height: 1.5;
+    color: #cccccc;
+    margin-bottom: 50px; /* Space above button */
+}
+
+/* --- View Content Button --- */
+.viewContentBtn {
+    position: absolute;
+    bottom: 30px; 
+    left: 50%;
+    transform: translateX(-50%) scale(0.9); /* Initially scaled down/hidden */
+    
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    
+    color: var(--white-text);
+    opacity: 0; /* Initially hidden */
+    
+    /* Button Background Gradient */
+    background: linear-gradient(to right, var(--bg-color-1), var(--bg-color-3));
+
+    /* Button Border Gradient (Rounded Corners) */
+    border: 1px solid transparent; 
+    background-clip: padding-box, border-box;
+    border-image: linear-gradient(
+        to right, 
+        var(--border-color-1), 
+        var(--border-color-2)
+    ) 1;
+
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+/* --- Hover Effect (Card and Button) --- */
+.cardBox:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 18px rgba(221, 188, 188, 0.5);
+}
+
+.cardBox:hover .viewContentBtn {
+    opacity: 1; /* Show button */
+    transform: translateX(-50%) scale(1.0); /* Scale up slightly */
+}
+
+
+/* --- Responsiveness & Mobile Fixes --- */
+
+/* Tablet View (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .servicesSection {
+        padding: 80px 30px;
+    }
+    .cardsGrid {
+        gap: 20px;
+    }
+    .cardBox {
+        width: 45%; /* Two cards per row */
+        min-height: 320px;
+    }
+}
+
+/* Mobile View (max-width: 600px) */
+@media (max-width: 600px) {
+    .servicesSection {
+        padding: 60px 20px;
+    }
+    .mainHeading {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+    .cardsGrid {
+        flex-direction: column; 
+        align-items: stretch;
+        gap: 15px;
+    }
+    .cardBox {
+        width: 100%; 
+        min-height: 250px;
+        padding-bottom: 80px;
+        
+        /* Mobile Smooth Animation Fix */
+        transform: none;
+        opacity: 1; 
+        transition-delay: 0s !important;
+        transition: box-shadow 0.3s ease;
+    }
+    .cardBox:hover {
+        transform: none; 
+        box-shadow: none;
+    }
+    
+    /* Ensure button is visible and fixed on mobile */
+    .viewContentBtn {
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.0);
+    }
+    .cardBox:hover .viewContentBtn {
+        transform: translateX(-50%) scale(1.05); /* Only scaling on hover */
+    }
+}

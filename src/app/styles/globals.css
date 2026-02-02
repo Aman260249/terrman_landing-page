@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import "tailwindcss";
+
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* styles/globals.css */
+
+/*
+  NOTE: To use 'Figma Intel', you must first import the font files 
+  (e.g., via @font-face, Google Fonts, or a utility like next/font).
+  For this example, we assume the font is locally available or imported.
+*/
+/*
+@font-face {
+  font-family: 'Figma Intel';
+  src: url('/fonts/FigmaIntel-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*/
+
+.inter{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  /* Set the body background color as requested */
+  background-color: #000000; 
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+
+/* Ensure font is used globally */
+* {
+  box-sizing: border-box;
+  font-family: 'Figma Intel', 'Arial', sans-serif;
+}

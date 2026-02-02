@@ -1,0 +1,296 @@
+/* PAGE WRAPPER */
+.pageWrapper {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #111111, #151819, #000000);
+  padding: 120px 20px;
+  font-family: 'Inter', sans-serif;
+  color: #cfcfcf;
+}
+
+/* MAIN CONTAINER */
+.container {
+  max-width: 1128px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HEADING */
+.heading {
+  font-size: 63px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 48px;
+}
+
+.heading span {
+  display: block;
+  font-weight: 400;
+  color: #d0d0d0;
+  margin-top: 12px;
+}
+
+/* PARAGRAPH */
+.description {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 2.19;
+  max-width: 980px;
+  color: #bdbdbd;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .heading {
+    font-size: 48px;
+  }
+
+  .description {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 36px;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 1.9;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 28px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
+
+
+/* =========================
+   PART 2 – CORE COMPONENTS
+========================= */
+
+.partTwo {
+  margin-top: 160px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.show .partTwo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HEADING */
+.partTwoHeading {
+  font-size: 64px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+
+/* SUB HEADING */
+.partTwoIntro {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 2.19;
+  max-width: 980px;
+  color: #cfcfcf;
+  margin-bottom: 56px;
+}
+
+/* IMAGE */
+.partTwoImage {
+  position: relative;
+  width: 100%;
+  max-width: 1151px;
+  height: 649px;
+  margin: 0 auto 72px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* TEXT CONTENT */
+.partTwoContent p {
+  font-size: 22px;
+  line-height: 2.19;
+  color: #bdbdbd;
+  margin-bottom: 28px;
+}
+
+.partTwoContent strong {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .partTwoHeading {
+    font-size: 48px;
+  }
+
+  .partTwoImage {
+    height: 520px;
+  }
+
+  .partTwoContent p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .partTwoHeading {
+    font-size: 36px;
+  }
+
+  .partTwoIntro {
+    font-size: 18px;
+    line-height: 1.9;
+  }
+
+  .partTwoImage {
+    height: 420px;
+  }
+
+  .partTwoContent p {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+}
+
+@media (max-width: 480px) {
+  .partTwoHeading {
+    font-size: 28px;
+  }
+
+  .partTwoImage {
+    height: 300px;
+  }
+
+  .partTwoContent p {
+    font-size: 14px;
+  }
+}
+/* =========================
+   FINAL SECTIONS
+========================= */
+
+.partThree,
+.partFour,
+.partFive,
+.partSix,
+.partSeven {
+  margin-top: 140px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.show .partThree,
+.show .partFour,
+.show .partFive,
+.show .partSix,
+.show .partSeven {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* TEXT */
+.partThreeText,
+.partFourIntro,
+.partSix p,
+.partSevenText {
+  font-size: 22px;
+  line-height: 2.19;
+  color: #bdbdbd;
+  max-width: 980px;
+  margin: 0 auto 28px;
+}
+
+.partSix strong {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* HEADINGS */
+.partFourHeading {
+  font-size: 48px;
+  font-weight: 500;
+  color: #ffffff;
+  max-width: 980px;
+  margin: 0 auto 32px;
+}
+
+/* IMAGES */
+.partFiveImage {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  height: 420px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.partSevenImage {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  height: 747px;
+  margin: 0 auto 56px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .partFourHeading {
+    font-size: 32px;
+  }
+
+  .partSevenImage {
+    height: 420px;
+  }
+
+  .partThreeText,
+  .partFourIntro,
+  .partSix p,
+  .partSevenText {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+}
+
+@media (max-width: 480px) {
+  .partSevenImage {
+    height: 300px;
+  }
+
+  .partFourHeading {
+    font-size: 26px;
+  }
+
+  .partThreeText,
+  .partFourIntro,
+  .partSix p,
+  .partSevenText {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,131 @@
+.careersContainer {
+  background: #000;
+  color: #fff;
+  padding: 120px 6%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers everything horizontally */
+}
+
+/* Wrapper to limit width and keep content readable */
+.detailWrapper {
+  width: 100%;
+  max-width: 900px; /* Real portals use a contained width for reading */
+  display: flex;
+  flex-direction: column;
+}
+
+.backLink {
+  color: #d9bcbc;
+  text-decoration: none;
+  font-size: 15px;
+  margin-bottom: 40px;
+  align-self: flex-start; /* Keeps back button on the left */
+  transition: opacity 0.2s;
+}
+
+.backLink:hover {
+  opacity: 0.7;
+}
+
+/* THE MAIN CARD */
+.mainCard {
+  background: linear-gradient(180deg, #0f0f0f, #0a0a0a);
+  border: 1px solid #776565;
+  border-radius: 24px;
+  padding: 50px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.title {
+  font-size: 42px; /* Large professional title */
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.infoBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  color: #cfcfcf;
+  font-size: 16px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(119, 101, 101, 0.3);
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.salary {
+  color: #fff;
+  font-weight: 600;
+  background: rgba(217, 188, 188, 0.1);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* CONTENT LAYOUT */
+.sectionTitle {
+  font-size: 22px;
+  color: #d9bcbc;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.descText {
+  line-height: 1.8;
+  color: #bdbdbd;
+  font-size: 17px;
+  margin-bottom: 40px;
+  white-space: pre-wrap;
+}
+
+/* CONTACT SECTION */
+.contactBox {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(119, 101, 101, 0.2);
+}
+
+.contactInfo p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+.applyBtn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 40px;
+  background: #e0c7c7;
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.applyBtn:hover {
+  transform: scale(1.03);
+  background: #d9bcbc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mainCard {
+    padding: 30px 20px;
+  }
+  .title {
+    font-size: 32px;
+  }
+  .infoBar {
+    gap: 15px;
+  }
+}

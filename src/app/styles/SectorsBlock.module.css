@@ -1,0 +1,170 @@
+/* styles/SectorsBlock.module.css - FINAL Fix for Main Header Position */
+
+:root {
+    --white-text: #FFFFFF;
+    --dark-bg: #000000;
+    --card-bg: #1a1a1a;
+    --gold-accent: #f7f7f7;
+    
+    --hover-color-1: #776565; 
+    --hover-color-2: #DDBCBC; 
+    
+    --animation-duration: 0.7s;
+    --animation-easing: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Base Section & Header Container --- */
+.sectorsSection {
+    background-color: var(--dark-bg);
+    padding: 100px 50px;
+    color: var(--white-text);
+    text-align: center;
+    position: relative; /* Ensure header content is contained */
+}
+
+.headerContent {
+    /* Ensure the header block is always at the top */
+    max-width: 1200px;
+    margin: 0 auto 60px auto; /* Margin pushes the grid down */
+    position: relative; /* Ensures it sits above any potential background interference */
+    z-index: 10; /* High z-index to stay on top */
+}
+
+/* --- MAIN SECTION HEADINGS (Ensure they remain centered at the top) --- */
+.mainHeading {
+    font-size: clamp(40px, 10vw, 96px); 
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.subHeading {
+    font-size: 18px;
+    color: #cfcfcf;
+}
+
+/* styles/SectorsBlock.module.css - Refined Gradient Overlay */
+
+/* ... all other styles (header, grid, card, etc.) remain the same ... */
+
+/* --- Image & Overlay --- */
+.imageWrapper {
+    position: absolute;
+    inset: 0;
+}
+
+.sectorImage {
+    transition: transform 0.4s ease; /* For hover zoom */
+}
+
+/* 🎯 REFINED Dark Gradient Overlay */
+.imageOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    
+    /* Stronger, vertical dark gradient: very dark at the bottom, fading up */
+    background: linear-gradient(
+        to bottom, 
+        rgba(0, 0, 0, 0.1) 0%,   /* Starts very subtle at the top */
+        rgba(0, 0, 0, 0.4) 50%,  /* Gets darker in the middle */
+        rgba(0, 0, 0, 0.9) 100%  /* Ends very dark at the bottom for text contrast */
+    );
+}
+
+/* --- TITLE POSITIONING FIX (No change, uses z-index: 2) --- */
+/* ... sectorTitle styles remain the same ... */
+
+/* ... all other styles (hover, responsiveness) remain the same ... */
+
+/* --- Grid Layout (No major changes) --- */
+.sectorsGrid {
+    max-width: 1700px; 
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px;
+    position: relative; /* Ensure grid sits above any potential background interference */
+    z-index: 5; 
+}
+
+/* --- Sector Card (Link) Styling (No changes) --- */
+.sectorCard {
+    text-decoration: none;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    padding-top: 66.5%; 
+    
+    opacity: 0;
+    transform: translateY(40px);
+    
+    transition: opacity var(--animation-duration) var(--animation-easing), 
+                transform 0.4s ease-out, 
+                box-shadow 0.3s ease;
+}
+
+.sectorCard.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Image & Overlay (No changes) --- */
+/* ... imageWrapper, sectorImage, and imageOverlay styles remain the same ... */
+
+/* --- INDIVIDUAL BOX TITLE POSITIONING (Remains Centered) --- */
+.sectorTitle {
+    position: absolute;
+    top: 50%; /* Position the top edge at 50% */
+    left: 50%; /* Position the left edge at 50% */
+    
+    /* CRITICAL FIX: Pull back by half the element's width AND half its height for perfect center */
+    transform: translate(-50%, -50%); 
+    
+    z-index: 2;
+    font-size: 35px;
+    font-weight: 600;
+    color: var(--white-text);
+    text-align: center;
+    
+    width: 90%; 
+    padding: 0 10px; 
+    
+    transition: color 0.3s ease;
+}
+
+
+/* --- PROFESSIONAL HOVER EFFECT FIX (No changes) --- */
+.sectorCard:hover {
+    transform: scale(1.03); 
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.7), 
+        0 0 15px var(--hover-color-2);
+}
+
+.sectorCard:hover .sectorImage {
+    transform: scale(1.02); 
+}
+
+.sectorCard:hover .sectorTitle {
+    color: var(--gold-accent); 
+}
+
+
+/* --- RESPONSIVENESS (No changes) --- */
+@media (max-width: 1024px) {
+    /* ... existing styles ... */
+    .sectorTitle {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* ... existing styles ... */
+    .sectorTitle {
+        font-size: 20px;
+    }
+}
