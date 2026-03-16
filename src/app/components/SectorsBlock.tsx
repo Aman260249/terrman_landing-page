@@ -1,7 +1,7 @@
 // components/SectorsBlock.js
 'use client';
 import Link from 'next/link'; // For linking to other pages
-import Image from 'next/image';
+import Image from "next/image";
 import useInView from './hooks/useInView'; 
 import styles from '../styles/SectorsBlock.module.css';
 
@@ -41,17 +41,17 @@ const SectorsBlock = () => {
             style={{ transitionDelay: `${index * 0.1}s` }}
           >
             
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={sector.imageSrc}
-                  alt={sector.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className={styles.sectorImage}
-                />
-                {/* Dark Gradient Overlay */}
-                <div className={styles.imageOverlay}></div>
-              </div>
+             <div className={styles.imageWrapper}>
+  <Image
+    src={sector.imageSrc}
+    alt={sector.title}
+    fill
+    style={{ objectFit: 'cover' }}
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // ✅ Add this line
+    className={styles.sectorImage}
+  />
+  <div className={styles.imageOverlay}></div>
+</div>  
 
               <h3 className={styles.sectorTitle}>{sector.title}</h3>
             

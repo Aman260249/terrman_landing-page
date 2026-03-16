@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/image";
 import styles from '../styles/Navbar.module.css';
 
 const navItems = [
@@ -28,6 +28,7 @@ const Navbar = () => {
             alt="Terraman logo"
             width={160}
             height={50}
+            style={{ width: '100%', height: 'auto' }}
             priority
           />
         </Link>

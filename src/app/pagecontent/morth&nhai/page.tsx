@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Image from "next/image";
 import styles from './morth-nhai.module.css';
 
 export default function MorthNhaiPage() {

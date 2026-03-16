@@ -1,7 +1,7 @@
 // components/FooterSection.tsx - CORRECTED
 'use client';
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/image";
 import styles from '../styles/FooterSection.module.css';
 
 // Reusing icons from the Contact Form for consistency
@@ -29,6 +29,7 @@ const FooterSection: React.FC = () => {
               alt="Terraman Logo"
               width={250}
               height={56}
+              style={{ width: 'auto', height: 'auto' }}
               priority
             />
           </div>

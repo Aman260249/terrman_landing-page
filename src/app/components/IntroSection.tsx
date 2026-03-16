@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Image from "next/image";
 import useInView from './hooks/useInView';
 import styles from '../styles/IntroSection.module.css';
 

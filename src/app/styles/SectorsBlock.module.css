@@ -154,17 +154,35 @@
 }
 
 
-/* --- RESPONSIVENESS (No changes) --- */
+/* --- RESPONSIVENESS FIX --- */
+
+/* Tablet View (1024px tak 2 columns) */
 @media (max-width: 1024px) {
-    /* ... existing styles ... */
+    .sectorsGrid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
+    }
     .sectorTitle {
         font-size: 24px;
     }
 }
 
+/* Mobile View (600px tak 1 column) */
 @media (max-width: 600px) {
-    /* ... existing styles ... */
+    .sectorsSection {
+        padding: 50px 20px; /* Mobile par padding thodi kam kar di */
+    }
+
+    .sectorsGrid {
+        grid-template-columns: 1fr; /* ✅ YE RAHA FIX: Mobile par 1 column */
+        gap: 15px; /* Mobile par gap kam kar diya */
+    }
+
     .sectorTitle {
         font-size: 20px;
+    }
+
+    /* Optional: Card ki height mobile par thodi kam kar do taaki zayda scroll na karna pade */
+    .sectorCard {
+        padding-top: 50%; /* Card ko thoda chota kar diya */
     }
 }

@@ -1,6 +1,5 @@
 'use client';
-
-import Image from 'next/image';
+import Image from "next/image";
 import styles from './HighwaysBridges.module.css';
 
 export default function HighwaysBridgesPage() {
