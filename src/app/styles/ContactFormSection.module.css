@@ -1,12 +1,13 @@
+
 :root {
   --bg-dark: #000000;
   --bg-card-1: #111111;
   --bg-card-2: #151819;
 
-  --border-light: #776565;
-  --border-accent: #DDBCBC;
+  --border-light:#ABAA57;
+  --border-accent: #ABAA57;
 
-  --text-white: #ffffff;
+  --text-white: #ABAA57;
   --text-muted: #b0b0b0;
   --text-placeholder: #9b9b9b;
 
@@ -29,7 +30,7 @@
 }
 
 .mainHeading {
-  font-size: 36px;
+  font-size: 60px;
   letter-spacing: 3px;
   font-weight: 500;
 }
@@ -37,7 +38,7 @@
 .subHeading {
   margin-top: 10px;
   color: var(--text-muted);
-  font-size: 15px;
+  font-size: 20px;
 }
 
 /* ================= LAYOUT ================= */

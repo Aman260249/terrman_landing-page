@@ -1,19 +1,16 @@
 /* styles/HeroSection.module.css */
 
-
-/* --- Base Layout --- */
 .hero {
     position: relative;
     width: 100%;
-    /* Use a min-height for consistent size on desktop */
-    min-height: 85vh; 
+    height: 100vh; /* Full screen height */
     display: flex;
     align-items: center;
-    overflow: hidden; /* Ensures image and overlay don't leak */
-    padding: 0 50px; /* Base padding */
+    overflow: hidden;
+    padding: 0 80px;
+    background-color: #000000; /* Fallback and blending base */
 }
 
-/* --- Background and Overlay --- */
 .backgroundContainer {
     position: absolute;
     top: 0;
@@ -23,11 +20,13 @@
     z-index: 1;
 }
 
-.backgroundImage {
-    /* Next.js Image component handles this, but good to ensure positioning */
+.backgroundVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Dark Gradient Overlay for readability */
+/* --- ✅ Updated Overlay for Smooth Bottom Blend --- */
 .overlay {
     position: absolute;
     top: 0;
@@ -35,115 +34,118 @@
     width: 100%;
     height: 100%;
     z-index: 2;
-    /* Create a dark, almost black gradient from left to right */
-  background: linear-gradient(
-        to top, /* Direction changed to vertical (bottom to top) */
-        rgba(0, 0, 0, 0.9) 12%,   /* Darkest black at the very bottom */
-        rgba(0, 0, 0, 0.7) 30%,  /* Slightly lighter further up */
-        rgba(0, 0, 0, 0.5) 60%,  
-        rgba(135, 114, 114, 0.2) 80%, 
-        rgba(0, 0, 0, 0) 100%    /* Fully transparent at the top */
-    );
+    /* Combined Gradient: Left-to-Right for text, Bottom-up for blending */
+    background: 
+        /* 1. Left dark gradient for text readability (unchanged) */
+        linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0) 100%
+        ),
+        /* 2. ✅ NEW: Bottom-to-Top solid black to transparent blend */
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 1) 0%,    /* Pure Black at the very bottom */
+            rgba(0, 0, 0, 0.7) 15%, /* Starts fading quickly */
+            rgba(0, 0, 0, 0) 40%    /* Fully transparent video above 40% height */
+        );
 }
 
-/* --- Content Block --- */
 .contentContainer {
     position: relative;
-    z-index: 3; /* Ensure content is above the overlay */
-    max-width: 700px; /* Constrain content width for better reading */
-    color: #ffffff; /* White text on dark background */
-}
-
-.textBlock {
-    /* For alignment on mobile, though centered by default */
+    z-index: 3;
+    max-width: 900px;
+    color: #ffffff;
 }
 
 .headline {
-    /* font-family: 'Figma Intel', 'Inter', sans-serif; */
-    font-size: 60px; /* Large font for desktop impact */
-    font-weight: 600;
+    font-size: 52px;
+    font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
 }
 
 .highlight {
-    color: #FFD700; /* Gold highlight color */
+    color: #FFD700; /* Gold */
 }
 
 .subtext {
-    font-family: 'Figma Intel', 'Inter', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
-    max-width: 550px;
+    max-width: 650px;
     margin-bottom: 40px;
-    font-weight: 400;
-    opacity: 0.9;
+    opacity: 0.95;
+    color: #f0f0f0;
 }
 
-/* --- Call-to-Action Button --- */
+.buttonGroup {
+    display: flex;
+    gap: 15px;
+}
+
 .callbackButton {
-    background-color: white;
+    background-color: #FFD700;
     color: #000000;
-    border: 2px solid #ffffff;
-    padding: 15px 30px;
+    border: none;
+    padding: 18px 35px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
-/* Button Hover Effect (Gold Accent) */
+.secondaryButton {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 18px 35px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
 .callbackButton:hover {
-    background-color: #FFD700; /* Gold background on hover */
-    color: #000000; /* Dark text on gold */
-    border-color: #FFD700;
-    transform: translateY(-2px); /* Subtle lift effect */
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+    transform: scale(1.05);
+    background-color: #ffcc00;
 }
 
-/* --- RESPONSIVENESS (Tablet/Mobile) --- */
+/* --- Mobile Responsiveness --- */
 
-/* Tablet View (max-width: 1024px) */
 @media (max-width: 1024px) {
-    .hero {
-        min-height: 70vh;
-        padding: 0 30px;
-    }
-
-    .headline {
-        font-size: 50px; /* Slightly smaller headline */
-    }
-    
-    .subtext {
-        font-size: 17px;
-    }
+    .hero { padding: 0 40px; }
+    .headline { font-size: 40px; }
 }
 
-/* Mobile View (max-width: 600px) */
 @media (max-width: 600px) {
     .hero {
-        min-height: 90vh; /* Make it taller on mobile */
         padding: 0 20px;
-        /* Center content if image doesn't cover well on all phones */
-        /* justify-content: center; */ 
-        text-align: left; 
+        text-align: center;
+        justify-content: center;
     }
-
-    .headline {
-        /* Auto-fix font size for mobile */
-        font-size: 32px; 
-        margin-top: 50px;
-    }
-
-    .subtext {
-        /* Good padding and margin on small screen */
-        font-size: 16px;
-        margin-bottom: 30px;
-    }
-
-    .callbackButton {
-        width: 100%; /* Full width button for better mobile usability */
-        padding: 12px 20px;
+    .headline { font-size: 28px; }
+    .subtext { font-size: 16px; }
+    .buttonGroup { flex-direction: column; }
+    .callbackButton, .secondaryButton { width: 100%; }
+    
+    /* Adjust bottom blend for shorter mobile screens */
+    .overlay {
+        background: 
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.8) 100%
+            ),
+            linear-gradient(
+                to top,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0) 30%
+            );
     }
 }

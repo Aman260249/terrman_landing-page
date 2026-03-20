@@ -1,22 +1,28 @@
 'use client';
-import Image from "next/image";
 import Link from 'next/link';
 import styles from '../styles/HeroSection.module.css';
 
 const HeroSection = () => {
   return (
     <section className={styles.hero}>
-      {/* Background Image */}
-      <div className={styles.backgroundContainer}>
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Infrastructure background image"
-          fill
-          priority
-          className={styles.backgroundImage}
-        />
-        <div className={styles.overlay}></div>
-      </div>
+      {/* Background Video */}
+     <div className={styles.backgroundContainer}>
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    className={styles.backgroundVideo}
+  >
+    {/* Cloudinary URL yahan paste kar diya hai */}
+    <source 
+      src="https://res.cloudinary.com/datklzcrj/video/upload/v1774009532/hero-video_jnb5qf.mp4" 
+      type="video/mp4" 
+    />
+    Your browser does not support the video tag.
+  </video>
+  <div className={styles.overlay}></div>
+</div>
 
       {/* Content */}
       <div className={styles.contentContainer}>
@@ -28,16 +34,21 @@ const HeroSection = () => {
 
           <p className={styles.subtext}>
             Terraman Infratech Consultants delivers Feasibility Studies, DPRs,
-            Bridge Surveys, Traffic Analysis, and Turn-key Engineering Solutions since 2015.
+            Bridge Surveys, Traffic Analysis, and Turn-key Engineering Solutions since 2016.
           </p>
 
-          {/* ✅ SCROLL TO CONTACT FORM */}
-          <Link href="/#contact">
-            <button className={styles.callbackButton}>
-              REQUEST CALLBACK
-            </button>
-          </Link>
-
+          <div className={styles.buttonGroup}>
+            <Link href="/#contact">
+              <button className={styles.callbackButton}>
+                REQUEST CALLBACK
+              </button>
+            </Link>
+            {/* <Link href="/#about">
+              <button className={styles.secondaryButton}>
+                LEARN MORE
+              </button>
+            </Link> */}
+          </div>
         </div>
       </div>
     </section>

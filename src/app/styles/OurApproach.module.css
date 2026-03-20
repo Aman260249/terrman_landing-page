@@ -1,214 +1,131 @@
-/* styles/OurApproach.module.css */
-
-:root {
-    --white-text: #FFFFFF;
-    --dark-bg: #000000;
-
-    --bg-color-1: #111111;
-    --bg-color-2: #151819;
-    --bg-color-3: #000000;
-
-    --border-color-1: #776565;
-    --border-color-2: #DDBCBC;
-
-    --animation-duration: 0.6s;
-    --animation-easing: cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* =========================
-   SECTION (SIZE FIXED)
-========================= */
 .approachSection {
-    background: linear-gradient(to bottom, var(--bg-color-1), var(--bg-color-3));
-
-    border: 1px solid transparent;
-    border-radius: 12px;
-    background-clip: padding-box;
-    border-image: linear-gradient(
-        to bottom right,
-        
-        var(--border-color-1),
-        var(--border-color-2)
-    ) 1;
-    border-radius: 10px;
-
-    padding: 90px 40px;   /* 🔥 reduced */
-    margin: 30px auto;
-    max-width: 1250px;
-
-    color: var(--white-text);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+  background: #050505;
+  padding: 140px 6%;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  overflow: hidden;
 }
 
-.contentWrapper {
-    max-width: 1320px;
-    margin: 0 auto;
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Asymmetric grid */
+  gap: 100px;
+  align-items: flex-start;
 }
 
-/* =========================
-   TEXT
-========================= */
+/* --- LEFT SIDE --- */
+.stickySide {
+  position: sticky;
+  top: 150px;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: #ABAA57;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
 .mainHeading {
-    font-size: clamp(48px, 9vw, 96px);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 16px;
-
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity var(--animation-duration) var(--animation-easing),
-                transform var(--animation-duration) var(--animation-easing);
+  font-size: clamp(50px, 6vw, 90px);
+  font-weight: 900;
+  line-height: 0.85;
+  margin-bottom: 30px;
 }
 
-.description {
-    max-width: 880px;
-    font-size: clamp(18px, 2vw, 20px);
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 45px;
-    color: #cccccc;
-
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity var(--animation-duration) var(--animation-easing),
-                transform var(--animation-duration) var(--animation-easing);
+.gold {
+  color: #fff;
+  -webkit-text-stroke: 1px #ABAA57; /* Outline effect */
 }
 
-.animatedText {
-    opacity: 1;
-    transform: translateY(0);
+.introText {
+  font-size: 18px;
+  color: #888;
+  line-height: 1.6;
+  max-width: 400px;
 }
 
-.coreValuesHeader {
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 26px;
-    color: var(--border-color-2);
+.accentLine {
+  width: 100px;
+  height: 2px;
+  background: #ABAA57;
+  margin-top: 40px;
 }
 
-/* =========================
-   GRID
-========================= */
-.valuesGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
+/* --- RIGHT SIDE: STEP CARDS --- */
+.stepsSide {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
-/* =========================
-   CARD
-========================= */
-.valueBox {
-    position: relative;
-    padding: 26px;
-    min-height: 220px;
-    border-radius: 10px;
-    cursor: pointer;
-    overflow: hidden;
-
-    background: linear-gradient(to bottom, var(--bg-color-2), var(--bg-color-3));
-
-    border: 1.5px solid transparent;
-    background-clip: padding-box, border-box;
-    border-radius: 10px;
-    border-image: linear-gradient(
-        to bottom right,
-        var(--border-color-1),
-        var(--border-color-2)
-    ) 1;
-
-    opacity: 0;
-    transform: translateY(30px);
-
-    transition:
-        opacity var(--animation-duration) var(--animation-easing),
-        transform 0.4s ease,
-        box-shadow 0.3s ease;
+.stepCard {
+  position: relative;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid rgba(171, 170, 87, 0.3);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.valueBox.animated {
-    opacity: 1;
-    transform: translateY(0);
+.bgNumber {
+  position: absolute;
+  top: -30px;
+  right: 20px;
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(171, 170, 87, 0.05); /* Very subtle giant number */
+  line-height: 1;
+  z-index: 0;
+  transition: color 0.4s ease;
 }
 
-.valueBox:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow:
-        0 12px 26px rgba(0, 0, 0, 0.5),
-        0 0 12px rgba(221, 188, 188, 0.35);
+.stepContent {
+  position: relative;
+  z-index: 1;
 }
 
-/* =========================
-   CARD TEXT
-========================= */
-.boxTitle {
-    font-size: clamp(18px, 2vw, 22px);
-    font-weight: 500;
-    margin-bottom: 8px;
-    line-height: 1.3;
+.stepTitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #efefef;
 }
 
-.boxDescription {
-    font-size: clamp(14px, 1.5vw, 15px);
-    font-weight: 300;
-    line-height: 1.6;
-    color: #b0b0b0;
+.stepDesc {
+  font-size: 17px;
+  color: #999;
+  line-height: 1.7;
+  max-width: 500px;
 }
 
-/* =========================
-   TABLET
-========================= */
+/* --- HOVER MAGIC --- */
+.stepCard:hover {
+  background: rgba(171, 170, 87, 0.05);
+  border-left-color: #ABAA57;
+  transform: translateX(20px);
+}
+
+.stepCard:hover .bgNumber {
+  color: rgba(171, 170, 87, 0.15); /* Number becomes clearer on hover */
+}
+
+.stepCard:hover .stepTitle {
+  color: #ABAA57;
+}
+
+/* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
-    .approachSection {
-        padding: 60px 28px;
-        margin: 24px auto;
-    }
-
-    .valuesGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-    }
-
-    .mainHeading {
-        font-size: clamp(40px, 8vw, 72px);
-    }
+  .container { grid-template-columns: 1fr; gap: 60px; }
+  .stickySide { position: relative; top: 0; }
+  .mainHeading { font-size: 60px; }
 }
 
-/* =========================
-   MOBILE (ANIMATION SAFE)
-========================= */
 @media (max-width: 600px) {
-    .approachSection {
-        padding: 28px 14px;
-        margin: 18px auto;
-        border-width: 1px;
-    }
-
-    .valuesGrid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .mainHeading {
-        font-size: 34px;
-    }
-
-    .description {
-        font-size: 15px;
-        margin-bottom: 28px;
-    }
-
-    .valueBox {
-        padding: 20px;
-        min-height: auto;
-        opacity: 1;
-        transform: none;
-        transition-delay: 0s !important;
-    }
-
-    .valueBox:hover {
-        transform: none;
-        box-shadow: none;
-    }
+  .stepCard:hover { transform: none; }
+  .bgNumber { font-size: 80px; }
+  .stepTitle { font-size: 22px; }
 }
