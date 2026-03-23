@@ -75,13 +75,13 @@ import IntroSection from './components/IntroSection';
 import MissionSection from './components/MissionSection';
 import TechnologySection from './components/TechnologySection';
 import SectorsBlock from './components/SectorsBlock';
-import WhyChooseUs from './components/ServiceCards';
+import WhyChooseUs from './components/Testimonials';
 import OurApproach from './components/OurApproach';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
 import EngineeringServices from './components/EngineeringServices';
 import ContactFormSection from './components/ContactFormSection';
 import FooterSection from './components/FooterSection';
-// import ServiceCards from "./components/ServiceCards";
+import Testimonials from './components/Testimonials';
 
 // import SloganBlock from './components/SloganBlock';
 
@@ -103,7 +103,7 @@ export default function Home() {
       <OurApproach />
       <WhyChooseUsSection />
       < EngineeringServices />
-      {/* < ServiceCards/> */}
+      < Testimonials/>
       < ContactFormSection />
       {/* < FooterSection /> */}
       
