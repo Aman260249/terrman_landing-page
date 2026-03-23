@@ -1,187 +1,446 @@
+/* ============================================
+   TECHNOLOGY SECTION — Cinematic Bento Grid
+   Colors: #0A2540 · #F97316 · #F8FAFC
+   Font: Bebas Neue + DM Sans
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── SECTION ── */
 .section {
+  padding: 140px 24px;
+  background: #0A2540;
   position: relative;
-  padding: 160px 8%;
-  background: #000;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
 }
 
-/* .bgImage {
+/* dot grid on dark bg */
+.dotGrid {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7), rgba(0,0,0,1)),
-              url('/images/tech-bg.jpg'); 
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-  opacity: 0.6;
-} */
-
-/* --- ✅ NEW: RADIAL GLOW --- */
-.radialGlow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(171, 170, 87, 0.15) 0%, transparent 70%);
-  z-index: 1;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
   pointer-events: none;
+  z-index: 0;
 }
 
+/* diagonal glow */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,115,22,0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HEADER ── */
 .header {
-  position: relative;
-  z-index: 2;
   text-align: center;
-  margin-bottom: 100px;
-}
-
-.topLabel {
-  font-size: 13px;
-  letter-spacing: 5px;
-  color: #888;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  display: block;
-}
-
-.title {
-  font-size: clamp(40px, 8vw, 100px);
-  font-weight: 900;
-  letter-spacing: -2px;
-  color: #fff;
-  line-height: 1;
-}
-
-.outlineTitle {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-}
-
-.headerLine {
-  width: 60px;
-  height: 4px;
-  background: #ABAA57;
-  margin: 30px auto;
-}
-
-.subtitle {
-  font-size: 18px;
-  color: #aaa;
-  max-width: 600px;
-  margin-inline: auto;
-  line-height: 1.6;
-}
-
-/* --- ✅ GRID & CARDS --- */
-.grid {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  margin-bottom: 64px;
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1),
+              transform 0.9s cubic-bezier(0.4,0,0.2,1);
 }
 
-.show {
+.headerVisible {
   opacity: 1;
   transform: translateY(0);
 }
 
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.eyebrowLine {
+  width: 36px;
+  height: 1.5px;
+  background: #F97316;
+  opacity: 0.5;
+}
+
+.eyebrowText {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #F97316;
+  font-weight: 500;
+}
+
+/* BIG HEADING */
+.heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: 2px;
+  color: #F8FAFC;
+  margin: 0 0 20px;
+}
+
+.heading span {
+  color: #F97316;
+  position: relative;
+  display: inline-block;
+}
+
+/* orange underline draw */
+.heading span::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 4px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+
+.headerVisible .heading span::after {
+  transform: scaleX(1);
+}
+
+.subheading {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(248,250,252,0.45);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ── BENTO GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 190px;
+  gap: 4px;
+}
+
+/* ── CARD BASE ── */
 .card {
   position: relative;
-  padding: 50px 40px;
-  background: rgba(15, 15, 15, 0.6);
-  backdrop-filter: blur(10px); /* Glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0px; /* Sharp engineering look */
-  transition: all 0.5s ease;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  transition:
+    opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+    transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.card:hover {
+  z-index: 2;
+}
+
+/* ── MEDIA ── */
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.media img,
+.media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.4,0,0.2,1);
+  filter: brightness(0.7) saturate(0.8);
+  transition: transform 0.9s cubic-bezier(0.4,0,0.2,1),
+              filter 0.5s ease;
+}
+
+.card:hover .media img,
+.card:hover .media video {
+  transform: scale(1.08);
+  filter: brightness(0.85) saturate(1);
+}
+
+/* ── OVERLAY ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,37,64,0.97) 0%,
+    rgba(10,37,64,0.5) 45%,
+    rgba(10,37,64,0.15) 100%
+  );
+  transition: background 0.5s ease;
+}
+
+.card:hover .overlay {
+  background: linear-gradient(
+    to top,
+    rgba(10,37,64,0.99) 0%,
+    rgba(10,37,64,0.7) 50%,
+    rgba(10,37,64,0.2) 100%
+  );
+}
+
+/* ── TOP BAR DRAW ── */
+.cardTopBar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  z-index: 4;
+}
+
+.card:hover .cardTopBar {
+  transform: scaleX(1);
+}
+
+/* ── CORNER TAG ── */
+.cardTag {
+  position: absolute;
+  top: 16px; right: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #F97316;
+  background: rgba(10,37,64,0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(249,115,22,0.25);
+  padding: 4px 10px;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card:hover .cardTag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CONTENT default — top aligned ── */
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* tall cards — bottom aligned */
+.contentBottom {
+  justify-content: flex-end;
+}
+
+/* ── NUMBER ── */
+.number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(249,115,22,0.4);
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+
+.card:hover .number {
+  color: #F97316;
+}
+
+/* ── TITLE ── */
+.cardTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: #F8FAFC;
+  margin: 0 0 8px;
+  line-height: 1.15;
+  transition: color 0.3s;
+}
+
+.card1 .cardTitle,
+.card3 .cardTitle {
+  font-size: 28px;
+}
+
+.card:hover .cardTitle {
+  color: #fff;
+}
+
+/* ── DESC ── */
+.cardDesc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(248,250,252,0.45);
+  margin: 0 0 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s;
+  max-width: 360px;
+}
+
+.card:hover .cardDesc {
+  opacity: 1;
+  transform: translateY(0);
+  color: rgba(248,250,252,0.7);
+}
+
+/* ── TOOL CHIPS ── */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s 0.06s ease, transform 0.4s 0.06s ease;
+}
+
+.card:hover .chips {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chip {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #F97316;
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.25);
+  padding: 2px 8px;
+  font-weight: 500;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.card:hover .chip {
+  background: rgba(249,115,22,0.15);
+  border-color: rgba(249,115,22,0.4);
+}
+
+/* ── PROGRESS BAR ── */
+.progressBar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+  z-index: 3;
   overflow: hidden;
 }
 
-.cardHeader {
+.progressFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #F97316, rgba(249,115,22,0.3));
+  transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.card:hover .progressFill {
+  width: 100%;
+}
+
+/* ── GRID POSITIONS (unchanged layout) ── */
+.card1 { grid-column: span 2; grid-row: span 2; }
+.card2 { grid-column: span 1; }
+.card3 { grid-column: span 1; grid-row: span 2; }
+.card4 { grid-column: span 1; }
+.card5 { grid-column: span 2; }
+.card6 { grid-column: span 2; }
+
+/* ── BOTTOM STRIP ── */
+.bottomStrip {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 20px;
+  margin-top: 24px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s 0.6s ease, transform 0.8s 0.6s ease;
 }
 
-.cardNumber {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ABAA57;
+.bottomStripVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.cardLine {
+.stripCount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: #F97316;
+  white-space: nowrap;
+}
+
+.stripLine {
   flex: 1;
   height: 1px;
-  background: rgba(171, 170, 87, 0.3);
+  background: linear-gradient(90deg, rgba(249,115,22,0.3), transparent);
 }
 
-.cardTitle {
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 20px;
-  letter-spacing: 0.5px;
+.stripTag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(248,250,252,0.15);
+  white-space: nowrap;
 }
 
-.cardDescription {
-  font-size: 15px;
-  line-height: 1.8;
-  color: #999;
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+  }
+  .card {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    min-height: 220px;
+  }
+  .contentBottom { justify-content: flex-start; }
+  .card1 .cardTitle,
+  .card3 .cardTitle { font-size: 22px; }
+  .heading { font-size: 72px; }
 }
 
-/* --- ✅ HOVER INTERACTIONS --- */
-.card:hover {
-  background: rgba(20, 20, 20, 0.8);
-  border-color: #ABAA57;
-  transform: translateY(-10px);
+@media (max-width: 768px) {
+  .section { padding: 90px 16px; }
+  .heading { font-size: 60px; }
+  .grid { gap: 3px; }
+  .card { min-height: 200px; }
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #ABAA57, transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
-.card:hover::before {
-  transform: translateX(100%);
-}
-
-.corner {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  border-bottom: 2px solid transparent;
-  border-right: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.card:hover .corner {
-  border-bottom-color: #ABAA57;
-  border-right-color: #ABAA57;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 1100px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 700px) {
-  .section { padding: 100px 20px; }
+@media (max-width: 480px) {
   .grid { grid-template-columns: 1fr; }
-  .title { font-size: 50px; }
-  .card { padding: 40px 30px; }
+  .card { min-height: 180px; }
+  .heading { font-size: 52px; }
+  .bottomStrip { display: none; }
 }

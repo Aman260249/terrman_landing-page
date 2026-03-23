@@ -1,156 +1,511 @@
-/* styles/Navbar.module.css */ 
+/* ============================================
+   NAVBAR — Premium Sticky + Mobile Drawer
+   Colors: #0A2540 · #F97316 · #F8FAFC
+   Font: DM Sans
+   Logo fix: mix-blend-mode for white bg logo
+   ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap');
 
-/* --- CONFIGURATION & GLOBAL STYLES --- */
-:root {
-    --primary-gold: #5b5a55; /* Define a clean gold color */
-    --link-color: #0a0a0a;
-}
-
+/* ══════════════════════════
+   NAVBAR BASE
+══════════════════════════ */
 .navbar {
-    font-family: "Inter";
-    width: 100%;
-    background-color: #ffffff;
-    padding: 15px 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  font-family: 'DM Sans', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+
+  /* default — transparent over hero */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.4s cubic-bezier(0.4,0,0.2,1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    height 0.4s ease;
+
+  /* entry animation */
+  opacity: 0;
+  transform: translateY(-16px);
 }
 
-/* --- LOAD ANIMATION (Initial Page Load Effect) --- */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.mounted {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    background 0.4s cubic-bezier(0.4,0,0.2,1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    height 0.4s ease;
 }
 
-.loaded {
-    /* Apply the animation once the component mounts */
-    animation: slideDown 0.6s ease-out;
+/* scrolled state — solid white */
+.scrolled {
+  background: rgba(255,255,255,0.97);
+  border-bottom-color: rgba(10,37,64,0.07);
+  box-shadow: 0 4px 24px rgba(10,37,64,0.06);
+  height: 64px;
+  backdrop-filter: blur(12px);
 }
 
-/* --- NAVIGATION LINKS (Desktop Styles) --- */
-.navLinks {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* For better responsiveness */
+/* ══════════════════════════
+   LOGO — WHITE BG FIX
+══════════════════════════ */
+.logoLink {
+  text-decoration: none;
+  flex-shrink: 0;
+  z-index: 1;
 }
 
-.navLinks li {
-    margin-left: 40px;
+.logoWrap {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+/*
+  KEY FIX: mix-blend-mode: multiply
+  Yeh white background ko transparent kar deta hai
+  Any colored navbar background pe perfectly dikhega
+  Light bg pe normal dikhta hai, dark pe blend hoga
+*/
+.logoImg {
+  /* agar navbar white/light hai */
+  mix-blend-mode: multiply;
+  max-width: 150px;
+  max-height: 44px;
+  object-fit: contain;
+  object-position: left center;
+  transition: opacity 0.3s ease;
+}
+
+.logoLink:hover .logoImg { opacity: 0.85; }
+
+/* ══════════════════════════
+   DESKTOP NAV LINKS
+══════════════════════════ */
+.desktopLinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
 }
 
 .navItem {
-    text-decoration: none;
-    color: var(--link-color);
-    font-size: 16px;
-    font-weight: 500;
-    padding: 5px 0;
-    position: relative;
-    transition: color 0.3s ease;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: rgba(10,37,64,0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-/* Gold Hover Effect */
-.navItem:hover {
-    color: var(--primary-gold); /* Use the gold color */
+.navItem:hover { color: #0A2540; }
+
+.navItem.active { color: #F97316; font-weight: 500; }
+
+/* underline draw */
+.navUnderline {
+  position: absolute;
+  bottom: 0; left: 14px; right: 14px;
+  height: 1.5px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Gold Underline Hover Effect */
-.navItem::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--primary-gold); /* Gold underline */
-    transition: width 0.3s ease;
+.navItem:hover .navUnderline,
+.navItem.active .navUnderline {
+  transform: scaleX(1);
 }
 
-.navItem:hover::after {
-    width: 100%;
+/* hero mode — light text when transparent */
+.navbar:not(.scrolled) .navItem {
+  color: rgba(248,250,252,0.75);
 }
 
-/* --- MOBILE/TABLET STYLES --- */
-.menuToggle {
-    display: none; /* Hidden on desktop */
-    background: none;
-    border: none;
-    font-size: 28px;
-    line-height: 1;
-    cursor: pointer;
-    color: var(--link-color);
-    z-index: 1100; /* Ensure it is above the menu */
+.navbar:not(.scrolled) .navItem:hover {
+  color: #F8FAFC;
 }
 
-/* Tablet and Mobile Breakpoint */
+.navbar:not(.scrolled) .navItem.active {
+  color: #F97316;
+}
+
+/* ══════════════════════════
+   RIGHT GROUP
+══════════════════════════ */
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* CTA button */
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  background: #F97316;
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.ctaBtn:hover {
+  background: #e8650a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(249,115,22,0.3);
+}
+
+/* hero mode CTA */
+.navbar:not(.scrolled) .ctaBtn {
+  background: transparent;
+  border: 1px solid rgba(248,250,252,0.35);
+  color: rgba(248,250,252,0.85);
+}
+
+.navbar:not(.scrolled) .ctaBtn:hover {
+  background: #F97316;
+  border-color: #F97316;
+  color: #fff;
+}
+
+/* ══════════════════════════
+   BURGER BUTTON
+══════════════════════════ */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  padding: 6px;
+  background: transparent;
+  border: 1px solid rgba(10,37,64,0.12);
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.burger:hover {
+  border-color: #F97316;
+  background: rgba(249,115,22,0.05);
+}
+
+/* hero mode burger */
+.navbar:not(.scrolled) .burger {
+  border-color: rgba(248,250,252,0.25);
+}
+
+.navbar:not(.scrolled) .burger:hover {
+  border-color: #F97316;
+}
+
+.burgerLine {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: #0A2540;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.35s ease,
+              background 0.3s;
+}
+
+/* hero mode lines */
+.navbar:not(.scrolled) .burgerLine {
+  background: rgba(248,250,252,0.85);
+}
+
+/* X state */
+.burgerOpen .burgerLine:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.burgerOpen .burgerLine:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.burgerOpen .burgerLine:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ══════════════════════════
+   MOBILE OVERLAY
+══════════════════════════ */
+.mobileOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: rgba(10,37,64,0.5);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.mobileOverlayOpen {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ══════════════════════════
+   MOBILE DRAWER
+══════════════════════════ */
+.mobileDrawer {
+  display: none;
+  position: fixed;
+  top: 0; right: 0;
+  width: min(340px, 88vw);
+  height: 100dvh;
+  z-index: 960;
+  background: #fff;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: -8px 0 48px rgba(10,37,64,0.12);
+}
+
+.mobileDrawerOpen {
+  transform: translateX(0);
+}
+
+/* ── DRAWER HEADER ── */
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(10,37,64,0.07);
+  flex-shrink: 0;
+}
+
+.drawerLogoLink { text-decoration: none; }
+
+.drawerLogoWrap {
+  width: 130px; height: 40px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Logo in drawer — white bg, so multiply works perfectly */
+.drawerLogoImg {
+  mix-blend-mode: multiply;
+  max-width: 130px;
+  max-height: 40px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.drawerClose {
+  width: 36px; height: 36px;
+  background: transparent;
+  border: 1px solid rgba(10,37,64,0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A2540;
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+
+.drawerClose:hover {
+  border-color: #F97316;
+  color: #F97316;
+  background: rgba(249,115,22,0.05);
+}
+
+/* ── DRAWER NAV ── */
+.drawerNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10,37,64,0.05);
+  position: relative;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    background 0.3s ease,
+    padding-left 0.3s ease;
+}
+
+.drawerLinkVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.drawerLink:hover {
+  background: rgba(249,115,22,0.04);
+  padding-left: 30px;
+}
+
+/* left orange accent on hover */
+.drawerLink::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #F97316;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.drawerLink:hover::before { transform: scaleY(1); }
+
+.drawerLinkNum {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(249,115,22,0.4);
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: color 0.3s;
+}
+
+.drawerLink:hover .drawerLinkNum { color: #F97316; }
+
+.drawerLinkName {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #0A2540;
+  flex: 1;
+  letter-spacing: 0.2px;
+  transition: color 0.3s;
+}
+
+.drawerLink:hover .drawerLinkName { color: #0A2540; }
+
+.drawerArrow {
+  color: rgba(10,37,64,0.2);
+  flex-shrink: 0;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.drawerLink:hover .drawerArrow {
+  color: #F97316;
+  transform: translateX(4px);
+}
+
+/* ── DRAWER FOOTER ── */
+.drawerFooter {
+  padding: 24px;
+  border-top: 1px solid rgba(10,37,64,0.07);
+  flex-shrink: 0;
+}
+
+.drawerCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  background: #0A2540;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  transition: background 0.3s, gap 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.drawerCta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #F97316;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.drawerCta:hover::before { transform: translateX(0); }
+.drawerCta:hover { gap: 14px; }
+.drawerCta span, .drawerCta svg { position: relative; z-index: 1; }
+.drawerCta svg { transition: transform 0.3s; }
+.drawerCta:hover svg { transform: translateX(4px); }
+
+.drawerContact {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+  text-align: center;
+  margin: 0;
+}
+
+/* ══════════════════════════
+   RESPONSIVE
+══════════════════════════ */
+@media (max-width: 1024px) {
+  .navbar { padding: 0 32px; }
+  .desktopLinks { gap: 0; }
+  .navItem { padding: 6px 10px; font-size: 13px; }
+}
+
 @media (max-width: 768px) {
-    .navbar {
-        padding: 10px 20px;
-    }
+  .navbar { padding: 0 20px; height: 64px; }
+  .scrolled { height: 60px; }
 
-    /* 1. Show the burger icon */
-    .menuToggle {
-        display: block;
-    }
+  /* hide desktop links + CTA on mobile */
+  .desktopLinks { display: none; }
+  .ctaBtn { display: none; }
 
-    /* 2. Style the Mobile Menu container */
-    .navLinks {
-        /* Hide by default */
-        display: none; 
-        
-        /* Position the mobile menu to take up full screen below the nav */
-        position: absolute;
-        top: 65px; /* Adjust based on navbar height */
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: #ffffff; 
-        flex-direction: column;
-        align-items: center;
-        padding-top: 30px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        
-        /* Animation for appearance */
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
+  /* show burger */
+  .burger { display: flex; }
 
-    /* 3. State when the menu is active/open */
-    .navLinks.active {
-        display: flex; /* Show the menu */
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* 4. Style the links inside the mobile menu */
-    .navLinks li {
-        margin: 15px 0;
-        width: 100%;
-        text-align: center;
-    }
-    
-    .navItem {
-        display: block;
-        font-size: 20px; /* Larger text for mobile touch targets */
-        padding: 10px 0;
-        font-weight: 600;
-    }
-    
-    .navItem::after {
-        /* Remove the underline from mobile links or adjust its positioning */
-        display: none;
-    }
+  /* show overlay + drawer */
+  .mobileOverlay { display: block; }
+  .mobileDrawer  { display: flex; }
 }

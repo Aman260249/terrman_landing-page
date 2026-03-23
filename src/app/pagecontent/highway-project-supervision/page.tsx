@@ -1,216 +1,321 @@
 'use client';
-import Image from "next/image";
-
+import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import styles from './highway-project-supervision.module.css';
 
-export default function HighwayProjectSupervisionPage() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(true);
+const coreComponents = [
+  {
+    num: '01',
+    icon: '◈',
+    title: 'Rigorous QC & QA',
+    label: 'Zero-Tolerance for Defects',
+    body: 'Continuous on-site testing of soil compaction, concrete strength, asphalt mix temperature, and pavement layer thickness. Full compliance with MoRTH Specifications and IRC standards — non-negotiable structural integrity at every stage.',
+    tags: ['IRC Compliant', 'MoRTH Standards'],
+  },
+  {
+    num: '02',
+    icon: '◉',
+    title: 'Contract & Time Management',
+    label: 'CPM/PERT Monitoring',
+    body: 'Meticulous monitoring of contractor progress against approved Work Programs. Advanced project management tools track physical and financial progress, detect delays early, and enforce corrective actions for timely delivery.',
+    tags: ['On-Time Delivery', 'Progress Tracking'],
+  },
+  {
+    num: '03',
+    icon: '◎',
+    title: 'Safety, Health & Environment',
+    label: 'SHE Management',
+    body: 'Enforcement of site safety plans, equipment audits, and EMP implementation — covering stormwater control, noise mitigation, and traffic diversions to protect workers, communities, and the environment.',
+    tags: ['EMP Enforced', 'Worker Safety'],
+  },
+  {
+    num: '04',
+    icon: '◍',
+    title: 'Design-Construction Interface',
+    label: 'Change Management',
+    body: 'Acting as the critical link between designers and contractors — resolving site challenges through design clarifications or Variation Orders. All changes reviewed for cost, time, and quality impacts to maintain scope and budget control.',
+    tags: ['Variation Orders', 'Scope Control'],
+  },
+];
 
+const reportingDocs = [
+  {
+    code: 'DPR',
+    title: 'Daily Progress Reports',
+    sub: 'Site Diaries',
+    content: 'Daily activities, manpower deployment, machinery, material receipts, weather events, and utility clashes — granular real-time visibility into site productivity.',
+    purpose: 'Immediate corrective action + contractor claim verification.',
+  },
+  {
+    code: 'QIR',
+    title: 'Quality Inspection Reports',
+    sub: 'Material Testing Records',
+    content: 'Concrete cube tests, compaction reports, bitumen quality checks, and steel reinforcement verification — proving compliance at every stage.',
+    purpose: 'Technical proof for final certification under MoRTH & IRC.',
+  },
+  {
+    code: 'MPR',
+    title: 'Monthly Progress Reports',
+    sub: 'Executive Summaries',
+    content: 'Physical progress, financial certification, risk logs, and forward work plans in a single consolidated report for senior stakeholders.',
+    purpose: 'Informed strategic and financial decision-making.',
+  },
+  {
+    code: 'VO',
+    title: 'Contractual Correspondence',
+    sub: 'Variation Orders & EOT',
+    content: 'All formal communications, Extension of Time requests, claims, and approved scope changes — fully documented and mutually agreed.',
+    purpose: 'Legal clarity and protection against disputes.',
+  },
+];
+
+function useInViewHook(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.25 }
+    const obs = new IntersectionObserver(
+      ([e]) => e.isIntersecting && setInView(true),
+      { threshold }
     );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, inView] as const;
+}
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+export default function HighwayProjectSupervisionPage() {
+  const [heroRef, heroInView]         = useInViewHook(0.1);
+  const [coreRef, coreInView]         = useInViewHook(0.08);
+  const [reportRef, reportInView]     = useInViewHook(0.08);
+  const [conclusionRef, conclusionInView] = useInViewHook(0.15);
 
   return (
-    <section className={styles.pageWrapper}>
-      <div
-        ref={sectionRef}
-        className={`${styles.container} ${visible ? styles.show : ''}`}
-      >
+    <main className={styles.page}>
 
-        {/* ===== PART 1 : HEADING ===== */}
-        <h1 className={styles.heading}>
-          Highway Project Supervision:
-          <span>Ensuring Quality, Compliance, and On-Time Delivery</span>
-        </h1>
+      {/* ══ HERO — FULL SCREEN DARK ══ */}
+      <section className={styles.hero} ref={heroRef}>
+        <div className={styles.heroBg}>
+          <Image
+            src="/content-images/high-bg22.jpg"
+            alt="Highway supervision"
+            fill className={styles.heroBgImg} priority
+          />
+          <div className={styles.heroOverlay} />
+        </div>
+        <div className={styles.heroGrid} />
 
-        {/* ===== PART 1 : PARAGRAPH ===== */}
-        <p className={styles.description}>
-          Within our comprehensive Engineering Services, Highway Project
-          Supervision stands as the crucial phase where the theoretical
-          perfection of the Detailed Project Report (DPR) is translated into
-          physical reality. Our expert supervision team acts as the client’s
-          vigilant eyes and ears on the ground, diligently managing all aspects
-          of the construction process to ensure unwavering adherence to quality
-          standards, strict regulatory compliance, and meticulous schedule
-          management. This service is vital for safeguarding the client’s
-          investment, mitigating risks, and guaranteeing that the final
-          infrastructure asset meets the stringent operational and safety
-          parameters set by MoRTH, NHAI, and international best practices.
-        </p>
-        
-        {/* ================= PART 2 ================= */}
-<section className={styles.partTwo}>
+        {/* breadcrumb */}
+        <div className={styles.heroBreadcrumb}>
+          <Link href="/" className={styles.breadLink}>Home</Link>
+          <span className={styles.breadSep}>/</span>
+          <Link href="/#services" className={styles.breadLink}>Services</Link>
+          <span className={styles.breadSep}>/</span>
+          <span className={styles.breadCurrent}>Highway Supervision</span>
+        </div>
 
-  {/* HEADING */}
-  <h2 className={styles.partTwoHeading}>
-    Core Components of Effective Highway Project Supervision
-  </h2>
+        <div className={styles.heroContent}>
+          {/* eyebrow */}
+          <div className={`${styles.heroBadge} ${heroInView ? styles.heroBadgeIn : ''}`}>
+            <span className={styles.heroBadgeDot} />
+            <span>Construction Phase Services</span>
+            <span className={styles.heroBadgeSep} />
+            <span>MoRTH · NHAI</span>
+          </div>
 
-  {/* SUB HEADING */}
-  <p className={styles.partTwoIntro}>
-    Effective supervision is a multi-faceted discipline that integrates
-    technical expertise, contractual knowledge, and rigorous project
-    management methodologies:
-  </p>
+          {/* heading — large centered */}
+          <h1 className={`${styles.heroHeading} ${heroInView ? styles.heroHeadingIn : ''}`}>
+            <span className={styles.hWord1}>Highway</span>
+            <span className={styles.hWord2}>Project</span>
+            <span className={styles.hWord3}>Supervision.</span>
+          </h1>
 
-  {/* IMAGE */}
-  <div className={styles.partTwoImage}>
-    <Image
-      src="/content-images/high-bg22.jpg"
-      alt="Highway Project Supervision"
-      fill
-      className={styles.image}
-    />
-    <div className={styles.imageOverlay} />
-  </div>
+          {/* tagline */}
+          <p className={`${styles.heroTagline} ${heroInView ? styles.heroTaglineIn : ''}`}>
+            Ensuring Quality, Compliance, and On-Time Delivery
+          </p>
+        </div>
 
-  {/* TEXT CONTENT */}
-  <div className={styles.partTwoContent}>
-    <p>
-      <strong>Rigorous Quality Control (QC) and Quality Assurance (QA):</strong>
-      Our primary focus is on ensuring the quality of materials and workmanship
-      at every stage. This involves continuous, on-site testing of soil
-      compaction, concrete strength, asphalt mix temperature, and pavement
-      layer thickness, ensuring compliance with MoRTH Specifications and IRC
-      standards. We enforce a non-negotiable <em>Zero-Tolerance for Defects</em>
-      policy to guarantee structural integrity and longevity.
-    </p>
+        {/* scroll hint */}
+        <div className={styles.scrollHint}>
+          <div className={styles.scrollLine} />
+          <span className={styles.scrollText}>Scroll to explore</span>
+        </div>
+      </section>
 
-    <p>
-      <strong>Proactive Contract and Time Management:</strong> We meticulously
-      monitor contractor progress against approved Work Programs (CPM/PERT).
-      Using advanced project management tools, we track physical and financial
-      progress, detect delays early, and enforce corrective actions—ensuring
-      timely delivery and strict contractual compliance.
-    </p>
+      {/* ══ INTRO — WIDE STATEMENT ══ */}
+      <section className={styles.introSection}>
+        <div className={styles.introInner}>
+          <div className={styles.introLabel}>
+            <div className={styles.introLabelLine} />
+            <span>What We Do</span>
+          </div>
+          <p className={styles.introStatement}>
+            Our expert supervision team acts as the client's <em>vigilant eyes and ears on the ground</em> — managing all aspects of construction to ensure unwavering adherence to quality standards, strict regulatory compliance, and meticulous schedule management.
+          </p>
+          <div className={styles.introBadges}>
+            {['Structural Integrity', 'Zero-Tolerance QA', 'Schedule Control', 'MoRTH Compliance', 'EMP Enforced'].map((b, i) => (
+              <span key={i} className={styles.introBadge}>{b}</span>
+            ))}
+          </div>
+        </div>
+      </section>
 
-    <p>
-      <strong>Safety, Health, and Environmental (SHE) Management:</strong>
-      Safety is paramount. Our teams enforce site safety plans, audit equipment
-      and procedures, and ensure Environmental Management Plan (EMP)
-      implementation—covering stormwater control, noise mitigation, and traffic
-      diversions to protect workers and communities.
-    </p>
+      {/* ══ CORE COMPONENTS — STAGGERED CARDS ══ */}
+      <section className={styles.coreSection} ref={coreRef}>
+        <div className={styles.coreInner}>
 
-    <p>
-      <strong>Design-Construction Interface and Change Management:</strong>
-      Acting as the critical link between designers and contractors, we resolve
-      site challenges swiftly through design clarifications or Variation Orders
-      (VOs). All changes are reviewed for cost, time, and quality impacts,
-      maintaining strict control over scope and budget.
-    </p> 
-    <section className={styles.partThree}>
-  <p className={styles.partThreeText}>
-    By maintaining a constant, expert, and impartial presence on the site, we
-    ensure that the finished highway is not just built, but built right—on
-    budget, on time, and to the highest standards of engineering excellence,
-    maximizing the asset’s value for the client and the public.
-  </p>
-</section>
-<section className={styles.partFour}>
+          <div className={styles.coreHeader}>
+            <div className={styles.coreTag}>
+              <div className={styles.coreTagLine} />
+              <span>Core Components</span>
+            </div>
+            <h2 className={styles.coreHeading}>
+              Effective Supervision<br/><span>is Multi-Faceted</span>
+            </h2>
+          </div>
 
-  <h2 className={styles.partFourHeading}>
-    Project Documentation and Reporting: Transparency and Control in Supervision
-  </h2>
+          {/* cards in staggered 2-col layout */}
+          <div className={styles.coreGrid}>
+            {coreComponents.map((c, i) => (
+              <div
+                key={i}
+                className={`${styles.coreCard} ${i % 2 !== 0 ? styles.coreCardOffset : ''} ${coreInView ? styles.coreCardVisible : ''}`}
+                style={{ transitionDelay: `${i * 0.12}s` }}
+              >
+                <div className={styles.coreCardTopBar} />
+                <div className={styles.coreCardHead}>
+                  <span className={styles.coreIcon}>{c.icon}</span>
+                  <span className={styles.coreNum}>{c.num}</span>
+                </div>
+                <span className={styles.coreLabel}>{c.label}</span>
+                <h3 className={styles.coreTitle}>{c.title}</h3>
+                <p className={styles.coreBody}>{c.body}</p>
+                <div className={styles.coreTags}>
+                  {c.tags.map((t, ti) => (
+                    <span key={ti} className={styles.coreTag2}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
 
-  <p className={styles.partFourIntro}>
-    A cornerstone of our Highway Project Supervision service is the generation
-    of comprehensive, accurate, and timely documentation. This meticulous
-    reporting framework ensures complete transparency, contractual compliance,
-    and stringent financial control throughout the construction period,
-    providing clients and stakeholders (including MoRTH/NHAI) with a clear,
-    auditable trail of all project activities, decisions, and outcomes.
-  </p>
+        </div>
+      </section>
 
-</section>
-<section className={styles.partFive}>
-  <div className={styles.partFiveImage}>
-    <Image
-      src="/content-images/high-bg-333.jpg"
-      alt="Highway Project Documentation"
-      fill
-      className={styles.image}
-    />
-    <div className={styles.imageOverlay} />
-  </div>
-</section>
-<section className={styles.partSix}>
+      {/* ══ FULL IMAGE BREAK ══ */}
+      <section className={styles.imageBreak}>
+        <div className={styles.imageBreakWrap}>
+          <Image
+            src="/content-images/high-bg-333.jpg"
+            alt="On-site supervision"
+            fill className={styles.imageBreakImg}
+          />
+          <div className={styles.imageBreakOverlay} />
+          <div className={styles.imageBreakText}>
+            <span className={styles.imageBreakQuote}>
+              "Built right — on budget, on time, to the highest standards of engineering excellence."
+            </span>
+          </div>
+        </div>
+      </section>
 
-  <p>
-    <strong>The Discipline of Project Reporting: Key Documents</strong><br />
-    Our systematic documentation flow transforms raw site data into actionable
-    intelligence, ensuring the project remains predictable and accountable:
-  </p>
+      {/* ══ REPORTING SECTION — TABLE LAYOUT ══ */}
+      <section className={styles.reportSection} ref={reportRef}>
+        <div className={styles.reportInner}>
 
-  <p>
-    <strong>Daily Progress Reports (DPRs) and Site Diaries:</strong><br />
-    <strong>Content:</strong> Granular on-site records detailing daily activities,
-    manpower and machinery deployment, material receipt, and significant events
-    such as weather delays or utility clashes.<br />
-    <strong>Purpose:</strong> Provides real-time visibility into site productivity,
-    enabling immediate corrective actions and verification of contractor claims.
-  </p>
+          <div className={styles.reportHeader}>
+            <div className={styles.reportTag}>
+              <div className={styles.reportTagLine} />
+              <span>Documentation & Reporting</span>
+            </div>
+            <h2 className={styles.reportHeading}>
+              Transparency &amp;<br/><span>Control</span>
+            </h2>
+            <p className={styles.reportSub}>
+              A cornerstone of our supervision service — comprehensive, accurate, and timely documentation providing clients and MoRTH/NHAI with a clear, auditable trail of all project activities.
+            </p>
+          </div>
 
-  <p>
-    <strong>Quality Inspection Reports (QIRs) and Material Testing Records:</strong><br />
-    <strong>Content:</strong> Documentation of material and workmanship testing,
-    including concrete cube tests, compaction reports, bitumen quality checks,
-    and steel reinforcement verification.<br />
-    <strong>Purpose:</strong> Technical proof that all works comply with DPR,
-    MoRTH, and IRC specifications, forming the basis for final certification.
-  </p>
+          {/* report doc cards */}
+          <div className={styles.reportGrid}>
+            {reportingDocs.map((doc, i) => (
+              <div
+                key={i}
+                className={`${styles.reportCard} ${reportInView ? styles.reportCardVisible : ''}`}
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <div className={styles.reportCardBar} />
 
-  <p>
-    <strong>Monthly Progress Reports (MPRs):</strong><br />
-    <strong>Content:</strong> Executive summaries covering physical progress,
-    financial certification, risk logs, and forward work plans.<br />
-    <strong>Purpose:</strong> Enables senior stakeholders to make informed
-    strategic and financial decisions.
-  </p>
+                {/* code stamp */}
+                <div className={styles.reportStamp}>
+                  <span className={styles.reportCode}>{doc.code}</span>
+                </div>
 
-  <p>
-    <strong>Contractual Correspondence and Variation Orders (VOs):</strong><br />
-    <strong>Content:</strong> All formal communications, EOT requests, claims,
-    and approved scope changes.<br />
-    <strong>Purpose:</strong> Ensures legal clarity, mutual agreement, and
-    protection against disputes.
-  </p>
+                <h3 className={styles.reportTitle}>{doc.title}</h3>
+                <span className={styles.reportSub2}>{doc.sub}</span>
 
-</section>
-<section className={styles.partSeven}>
-  <div className={styles.partSevenImage}>
-    <Image
-      src="/content-images/high_bg-232.jpg"
-      alt="Highway Supervision Reporting System"
-      fill
-      className={styles.image}
-    />
-    <div className={styles.imageOverlay} />
-  </div>
+                <div className={styles.reportDivider} />
 
-  <p className={styles.partSevenText}>
-    Through this disciplined approach to reporting, we ensure every aspect of
-    the project is documented, auditable, and transparent—guaranteeing the
-    client absolute control over the quality and trajectory of their high-value
-    highway investment.
-  </p>
-</section>
+                <div className={styles.reportContentBlock}>
+                  <span className={styles.reportBlockLabel}>Content</span>
+                  <p className={styles.reportBlockText}>{doc.content}</p>
+                </div>
 
-  </div>
+                <div className={styles.reportContentBlock}>
+                  <span className={styles.reportBlockLabel}>Purpose</span>
+                  <p className={`${styles.reportBlockText} ${styles.reportPurpose}`}>{doc.purpose}</p>
+                </div>
+              </div>
+            ))}
+          </div>
 
-</section>
+        </div>
+      </section>
 
+      {/* ══ FINAL LARGE IMAGE + CONCLUSION ══ */}
+      <section className={styles.conclusionSection} ref={conclusionRef}>
 
-      </div> 
-      
-    </section>
+        <div className={styles.conclusionImageWrap}>
+          <Image
+            src="/content-images/high_bg-232.jpg"
+            alt="Highway completion"
+            fill className={styles.conclusionImg}
+          />
+          <div className={styles.conclusionImgOverlay} />
+        </div>
+
+        <div className={`${styles.conclusionContent} ${conclusionInView ? styles.conclusionContentIn : ''}`}>
+          <div className={styles.conclusionInner}>
+            <span className={styles.conclusionLabel}>The Result</span>
+            <h2 className={styles.conclusionHeading}>
+              Absolute Control.<br/>
+              <span>Zero Compromise.</span>
+            </h2>
+            <p className={styles.conclusionText}>
+              Through disciplined documentation and expert on-site presence, every aspect of the project is documented, auditable, and transparent — guaranteeing the client absolute control over the quality and trajectory of their high-value highway investment.
+            </p>
+            <Link href="/#contact" className={styles.conclusionCta}>
+              <span>Engage Our Supervision Team</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </div>
+        </div>
+
+      </section>
+
+      {/* ── BACK ── */}
+      <div className={styles.backWrap}>
+        <Link href="/services" className={styles.backLink}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M15 8H1M7 2L1 8l6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span>Back to Services</span>
+        </Link>
+      </div>
+
+    </main>
   );
 }

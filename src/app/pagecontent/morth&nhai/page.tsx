@@ -1,137 +1,289 @@
 'use client';
-
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import styles from './morth-nhai.module.css';
 
-export default function MorthNhaiPage() {
-    return (
-        <section className={styles.pageWrapper}>
+const credentials = [
+  { code: 'IRC',   label: 'Indian Roads Congress',           desc: 'Full compliance with all IRC standards and specifications across every project phase.' },
+  { code: 'EPC',   label: 'Engineering Procurement Construction', desc: 'Proven methodology for EPC model execution under NHAI guidelines.' },
+  { code: 'HAM',   label: 'Hybrid Annuity Model',            desc: 'Deep structuring expertise for HAM project financing and compliance frameworks.' },
+  { code: 'BOT',   label: 'Build Operate Transfer',          desc: 'End-to-end BOT project management from feasibility to revenue collection.' },
+];
 
-            {/* Background Gradient */}
-            <div className={styles.bgOverlay} />
+const advantages = [
+  {
+    num: '01',
+    title: 'Deep Regulatory Acumen',
+    sub: 'Expedited Clearances',
+    body: 'Our specialized teams possess profound, up-to-date knowledge of the entire regulatory framework — IRC standards, environmental and forest clearances, and procedural requirements across EPC, HAM, and BOT models. We prepare flawless DPRs and accelerate critical approval phases.',
+  },
+  {
+    num: '02',
+    title: 'Integrated Project Management',
+    sub: 'Technical Superiority',
+    body: 'Holistic, data-driven methodologies encompassing feasibility studies, traffic volume projections, detailed engineering design, QA protocols, and construction supervision — integrating ITS for smart highway assets that go beyond compliance.',
+  },
+  {
+    num: '03',
+    title: 'Risk Mitigation',
+    sub: 'Financial Optimization',
+    body: 'Comprehensive risk assessment covering geological, financial, and construction risks — proactive identification of land acquisition issues, material volatility, and budget exposure. Our financial models maximize ROI with fiscal prudence.',
+  },
+];
 
-            <div className={styles.container}>
-
-                {/* TOP CONTENT */}
-                <div className={styles.topSection}>
-                    <h1 className={styles.heading}>
-                        Why Choose Our Terraman <br />
-                        <span>for MoRTH & NHAI Projects</span>
-                    </h1>
-
-                    <p className={styles.description}>
-                       The successful execution of Ministry of Road Transport and Highways (Morth) and National Highways Authority of India (NHAI) approved infrastructure mandates requires an elevated level of specialized expertise, unwavering regulatory comprehension, and demonstrated technical proficiency. Choosing our consultancy firm is a strategic decision that guarantees the optimal management and delivery of these complex, high-stakes national projects, moving beyond mere compliance to achieve benchmark excellence and sustainable value creation.
-                    </p>
-                </div>
-
-                {/* IMAGE BLOCK */}
-                <div className={styles.imageBlock}>
-                    <Image
-                        src="/content-images/morth-bg-2.jpg"
-                        alt="MoRTH & NHAI Engineering"
-                        fill
-                        className={styles.image}
-                        priority
-                    />
-                    <div className={styles.imageGradient} />
-                </div>
-
-                {/* BOTTOM CONTENT */}
-                <div className={styles.bottomSection}>
-                    <h3 className={styles.subHeading}>
-                         Our Terraman for Morth & NHAI Projects
-                    </h3>
-
-                    <p className={styles.bottomText}>
-                        Terraman has extensive experience working with national and state-level authorities, particularly on projects under MoRTH and NHAI standards. Our methodology strictly follows the latest guidelines, codes, and engineering practices recommended by these authorities. From traffic surveys on National Highways to DPR preparation for new corridors, we ensure complete compliance with government standards. This makes our deliverables not only technically accurate but also ready for approval, implementation, and tender processes.
-                    </p>
-                </div>
-                {/* SECOND CONTENT SECTION */}
-                <div className={styles.secondSection}>
-
-                    <div className={styles.secondText}>
-                        <h2 className={styles.secondHeading}>
-                            Why Our Consultancy is Your<br />
-                            Strategic Partner
-                        </h2>
-
-                        <p>
-                            We offer a distinctive blend of capabilities that directly address the
-                            rigorous demands and specific intricacies inherent in MoRTH and NHAI
-                            project lifecycle management.
-                        </p>
-
-                        <p>
-                            <strong>Deep Regulatory Acumen and Expedited Clearances:</strong> Our
-                            specialized teams possess profound, up-to-date knowledge of the entire
-                            regulatory framework, including IRC, Indian Roads Congress standards,
-                            relevant environmental and forest clearances, and nuanced procedural
-                            requirements of models like EPC, HAM, and BOT.
-                        </p>
-
-                        <p>
-                            This mastery allows us to meticulously prepare flawless Detailed Project
-                            Reports (DPRs), navigate bureaucratic processes with unprecedented
-                            efficiency, and significantly accelerate critical project approval and
-                            commencement phases—thus mitigating costly delays.
-                        </p>
-
-                        <p>
-                            <strong>Integrated Project Management and Technical Superiority:</strong>
-                            We employ holistic, data-driven project management methodologies that
-                            encompass everything from initial feasibility studies and sophisticated
-                            traffic volume projections to detailed engineering design, quality
-                            assurance protocols, and construction supervision.
-                        </p>
-
-                        <p>
-                            Our consultants are experts in implementing innovative engineering
-                            solutions, optimizing road geometry for safety and capacity, and
-                            integrating Intelligent Transport Systems (ITS), ensuring the final asset
-                            is not only compliant but represents the pinnacle of modern highway
-                            infrastructure.
-                        </p>
-                    </div>
-
-                    <div className={styles.secondImage}>
-                        <Image
-                            src="/content-images/morth-bg-1.jpg"
-                            alt="Highway Infrastructure"
-                            fill
-                            className={styles.image}
-                        />
-                        <div className={styles.imageGradient} />
-                    </div>
-
-                </div>
-                {/* THIRD / FINAL CONTENT SECTION */}
-                <div className={styles.thirdSection}>
-                    <p>
-                        <strong>Risk Mitigation and Financial Optimization:</strong> Large-scale
-                        infrastructure projects are inherently exposed to geological, financial,
-                        and construction risks. We specialize in comprehensive risk assessment and
-                        mitigation strategies, protecting stakeholder interests through proactive
-                        identification of potential issues in land acquisition, material sourcing,
-                        and budget volatility.
-                    </p>
-
-                    <p>
-                        Furthermore, our financial models and optimization techniques are geared
-                        towards maximizing return on investment (ROI) for clients, ensuring that
-                        public or private capital is deployed with the utmost fiscal prudence and
-                        accountability.
-                    </p>
-
-                    <p className={styles.finalNote}>
-                        In essence, we are not just consultants; we are performance enablers
-                        dedicated to transforming challenging governmental mandates into
-                        successful, on-time, and high-quality infrastructure assets that truly
-                        contribute to national economic resilience and connectivity.
-                    </p>
-                </div>
-
-
-            </div>
-        </section>
+function useReveal(threshold = 0.12) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => e.isIntersecting && setVis(true),
+      { threshold }
     );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, vis] as const;
+}
+
+export default function MorthNhaiPage() {
+  const [heroRef, heroVis]       = useReveal(0.1);
+  const [credRef, credVis]       = useReveal(0.08);
+  const [advRef,  advVis]        = useReveal(0.08);
+  const [closingRef, closingVis] = useReveal(0.15);
+
+  return (
+    <main className={styles.page}>
+
+      {/* ══ HERO — DIAGONAL SPLIT ══ */}
+      <section className={styles.hero} ref={heroRef}>
+
+        {/* left dark panel */}
+        <div className={styles.heroLeft}>
+          <div className={styles.heroLeftBg} />
+          <div className={styles.heroGridLines} />
+
+          <div className={styles.heroLeftInner}>
+            {/* breadcrumb */}
+            <div className={styles.breadcrumb}>
+              <Link href="/" className={styles.breadLink}>Home</Link>
+              <span className={styles.breadSep}>/</span>
+              <Link href="/#services" className={styles.breadLink}>Services</Link>
+              <span className={styles.breadSep}>/</span>
+              <span className={styles.breadCurrent}>MoRTH & NHAI</span>
+            </div>
+
+            {/* authority stamp */}
+            <div className={`${styles.authStamp} ${heroVis ? styles.authStampIn : ''}`}>
+              <div className={styles.stampRing}>
+                <div className={styles.stampInner}>
+                  <span className={styles.stampText}>GOI</span>
+                  <span className={styles.stampSub}>Approved</span>
+                </div>
+              </div>
+              <div className={styles.stampLabels}>
+                <span className={styles.stampLabel1}>MoRTH Certified</span>
+                <span className={styles.stampLabel2}>NHAI Approved</span>
+              </div>
+            </div>
+
+            {/* heading */}
+            <h1 className={`${styles.heroHeading} ${heroVis ? styles.heroHeadingIn : ''}`}>
+              <span className={styles.hTop}>MoRTH &</span>
+              <span className={styles.hMid}>NHAI</span>
+              <span className={styles.hBot}>Projects.</span>
+            </h1>
+
+            <p className={`${styles.heroClaim} ${heroVis ? styles.heroClaimIn : ''}`}>
+              Strategic expertise for India's national highway infrastructure.
+            </p>
+          </div>
+        </div>
+
+        {/* right image panel */}
+        <div className={styles.heroRight}>
+          <Image
+            src="/content-images/morth-bg-2.jpg"
+            alt="MoRTH NHAI highway"
+            fill className={styles.heroImg} priority
+          />
+          <div className={styles.heroImgOverlay} />
+
+          {/* vertical text label */}
+          <div className={styles.heroVerticalLabel}>
+            National Highway Infrastructure
+          </div>
+        </div>
+
+      </section>
+
+      {/* ══ INTRO STATEMENT BAND ══ */}
+      <section className={styles.statementBand}>
+        <div className={styles.statementInner}>
+          <div className={styles.statementLeft}>
+            <div className={styles.stLabel}>
+              <div className={styles.stLabelLine} />
+              <span>Why Choose Terraman</span>
+            </div>
+            <p className={styles.statementNum}>8+</p>
+            <p className={styles.statementNumLabel}>Years of MoRTH/NHAI compliance</p>
+          </div>
+          <div className={styles.statementRight}>
+            <p className={styles.statementText}>
+              Choosing Terraman is a <em>strategic decision</em> that guarantees the optimal management and delivery of complex, high-stakes national projects — moving beyond mere compliance to achieve <em>benchmark excellence</em> and sustainable value creation.
+            </p>
+            <div className={styles.statementTags}>
+              {['IRC Standards', 'EPC · HAM · BOT', 'DPR Preparation', 'Traffic Surveys', 'NHAI Clearances'].map((t, i) => (
+                <span key={i} className={styles.stTag}>{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ CREDENTIAL CODES ══ */}
+      <section className={styles.credSection} ref={credRef}>
+        <div className={styles.credInner}>
+
+          <div className={styles.credHeader}>
+            <div className={styles.credTag}>
+              <div className={styles.credTagLine} />
+              <span>Our Credentials</span>
+            </div>
+            <h2 className={styles.credHeading}>
+              Standards We<br/><span>Master</span>
+            </h2>
+          </div>
+
+          {/* horizontal code cards */}
+          <div className={styles.credGrid}>
+            {credentials.map((c, i) => (
+              <div
+                key={i}
+                className={`${styles.credCard} ${credVis ? styles.credCardVisible : ''}`}
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <div className={styles.credCardBar} />
+                <span className={styles.credCode}>{c.code}</span>
+                <div className={styles.credDivider} />
+                <span className={styles.credLabel}>{c.label}</span>
+                <p className={styles.credDesc}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ══ FULL IMAGE + QUOTE ══ */}
+      <section className={styles.imageBand}>
+        <Image
+          src="/content-images/morth-bg-1.jpg"
+          alt="Highway engineering"
+          fill className={styles.imageBandImg}
+        />
+        <div className={styles.imageBandOverlay} />
+        <div className={styles.imageBandContent}>
+          <blockquote className={styles.imageBandQuote}>
+            "Not just consultants — we are performance enablers dedicated to transforming governmental mandates into successful, on-time, high-quality infrastructure assets."
+          </blockquote>
+          <div className={styles.imageBandAttr}>
+            <div className={styles.imageBandLine} />
+            <span>Terraman Infratech Consultants</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ ADVANTAGES — NUMBERED ROWS ══ */}
+      <section className={styles.advSection} ref={advRef}>
+        <div className={styles.advInner}>
+
+          <div className={styles.advHeader}>
+            <div className={styles.advTag}>
+              <div className={styles.advTagLine} />
+              <span>Strategic Partnership</span>
+            </div>
+            <h2 className={styles.advHeading}>
+              Why We Are<br/><span>Your Best Choice</span>
+            </h2>
+          </div>
+
+          {/* left image sticky + right rows */}
+          <div className={styles.advLayout}>
+
+            <div className={styles.advImageWrap}>
+              <Image
+                src="/content-images/morth-bg-2.jpg"
+                alt="Highway planning"
+                fill className={styles.advImage}
+              />
+              <div className={styles.advImageOverlay} />
+
+              {/* floating stat */}
+              <div className={styles.advStat}>
+                <span className={styles.advStatNum}>100%</span>
+                <span className={styles.advStatLabel}>Regulatory Compliance</span>
+              </div>
+            </div>
+
+            <div className={styles.advRows}>
+              {advantages.map((a, i) => (
+                <div
+                  key={i}
+                  className={`${styles.advRow} ${advVis ? styles.advRowVisible : ''}`}
+                  style={{ transitionDelay: `${i * 0.12}s` }}
+                >
+                  <div className={styles.advRowLeft}>
+                    <span className={styles.advNum}>{a.num}</span>
+                    <div className={styles.advNumLine} />
+                  </div>
+                  <div className={styles.advRowRight}>
+                    <div className={styles.advRowHead}>
+                      <h3 className={styles.advTitle}>{a.title}</h3>
+                      <span className={styles.advSub}>{a.sub}</span>
+                    </div>
+                    <p className={styles.advBody}>{a.body}</p>
+                  </div>
+                  <div className={styles.advRowBorder} />
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ══ CLOSING STATEMENT ══ */}
+      <section className={styles.closingSection} ref={closingRef}>
+        <div className={`${styles.closingInner} ${closingVis ? styles.closingInnerIn : ''}`}>
+          <span className={styles.closingEyebrow}>The Terraman Commitment</span>
+          <h2 className={styles.closingHeading}>
+            National Economic<br/>
+            <span>Resilience &amp; Connectivity.</span>
+          </h2>
+          <p className={styles.closingText}>
+            Terraman's deliverables are not only technically accurate but also ready for approval, implementation, and tender processes — ensuring public or private capital is deployed with the utmost fiscal prudence and accountability.
+          </p>
+          <Link href="/#contact" className={styles.closingCta}>
+            <span>Partner on Your MoRTH/NHAI Project</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* ── BACK ── */}
+      <div className={styles.backWrap}>
+        <Link href="/#services" className={styles.backLink}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M15 8H1M7 2L1 8l6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span>Back to Services</span>
+        </Link>
+      </div>
+
+    </main>
+  );
 }

@@ -1,51 +1,123 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-@import "tailwindcss";
-
-
-
+/* Root Variables (Design System) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 🎨 Colors */
+  --primary: #0A2540;     /* Dark Blue */
+  --accent: #F97316;      /* Orange */
+  --bg-light: #F8FAFC;    /* Light Background */
+  --white: #ffffff;
+  --text-dark: #111827;
+  --text-light: #6B7280;
+
+  /* ✨ UI */
+  --radius: 10px;
+  --transition: all 0.3s ease;
 }
 
-/* styles/globals.css */
-
-/*
-  NOTE: To use 'Figma Intel', you must first import the font files 
-  (e.g., via @font-face, Google Fonts, or a utility like next/font).
-  For this example, we assume the font is locally available or imported.
-*/
-/*
-@font-face {
-  font-family: 'Figma Intel';
-  src: url('/fonts/FigmaIntel-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-*/
-
-.inter{
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Global Body */
 html,
 body {
-  padding: 0;
-  margin: 0;
-  /* Set the body background color as requested */
-  background-color: #000000; 
-  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--white);
+  color: var(--text-dark);
   scroll-behavior: smooth;
 }
 
+/* Container (Reusable) */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-/* Ensure font is used globally */
-* {
-  box-sizing: border-box;
-  font-family: 'Figma Intel', 'Arial', sans-serif;
+/* Headings */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Paragraph */
+p {
+  color: var(--text-light);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* Buttons (Global Style) */
+.btn {
+  background: linear-gradient(135deg, var(--primary), #1E3A8A);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Secondary Button */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* Section Spacing */
+.section {
+  padding: 100px 0;
+}
+
+/* Light Background Section */
+.section-light {
+  background: var(--bg-light);
+}
+
+/* Card Style */
+.card {
+  background: var(--white);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Image */
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utility */
+.text-center {
+  text-align: center;
 }

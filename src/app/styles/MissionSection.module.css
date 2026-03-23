@@ -1,145 +1,514 @@
-.section {
-  background: #000;
-  padding: 160px 10%;
-  font-family: 'Inter', sans-serif;
-  color: #fff;
-}
+/* ============================================
+   MISSION SECTION — Vision (dark) + Mission (light)
+   Colors: #0A2540 · #F97316 · #F8FAFC
+   Font: Bebas Neue + DM Sans
+   Two sections — two totally different feels
+   ============================================ */
 
-/* VISION STYLES (Keep as is) */
-.visionBlock {
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* ══════════════════════════════════
+   VISION SECTION — DARK CINEMATIC
+══════════════════════════════════ */
+
+.visionSection {
+  position: relative;
+  background: #0A2540;
+  padding: 130px 24px;
+  overflow: hidden;
   text-align: center;
-  max-width: 1100px;
-  margin: 0 auto 150px; /* Space between Vision and Mission */
 }
 
-.smallTitle {
-  font-size: 13px;
-  letter-spacing: 5px;
-  color: #666;
-  text-transform: uppercase;
-  margin-bottom: 25px;
-  display: block;
+/* grid lines */
+.visionGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
 }
 
-.visionText {
-  font-size: 44px;
-  line-height: 1.3;
-  font-weight: 800;
-  text-transform: uppercase;
+/* ambient glow */
+.visionGlow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse, rgba(249,115,22,0.07) 0%, transparent 65%);
+  pointer-events: none;
 }
 
-.gold {
-  color: #ABAA57;
-}
-
-/* --- ✅ MISSION: MINIMALIST LIST LOOK --- */
-.missionWrapper {
-  max-width: 1000px;
+.visionInner {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
   margin: 0 auto;
 }
 
-.missionHeader {
-    margin-bottom: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+/* ── EYEBROW ── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.missionMainTitle {
-    font-size: 28px;
-    letter-spacing: 4px;
-    font-weight: 700;
-    color: #fff;
+.eyebrowVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.titleLine {
-    width: 80px;
-    height: 2px;
-    background: #ABAA57;
-    margin-top: 15px;
+.eyebrowDot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #F97316;
+  animation: pulse 2.5s ease-in-out infinite;
 }
 
-.missionList {
+.eyebrowText {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #F97316;
+  font-weight: 500;
+}
+
+/* ── VISION QUOTE ── */
+.visionQuote {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(24px, 3.5vw, 44px);
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.55;
+  color: rgba(248,250,252,0.55);
+  margin: 0 0 40px;
+  letter-spacing: 0.2px;
+
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 1s 0.15s cubic-bezier(0.4,0,0.2,1),
+              transform 1s 0.15s cubic-bezier(0.4,0,0.2,1);
+}
+
+.visionQuoteVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.visionQuote em {
+  font-style: normal;
+  color: #F8FAFC;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+}
+
+/* keyword underline on each em */
+.visionQuote em::after {
+  content: '';
+  position: absolute;
+  bottom: 1px; left: 0; right: 0;
+  height: 2px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.visionQuoteVisible em::after {
+  transform: scaleX(1);
+  transition-delay: 0.6s;
+}
+
+/* quote mark */
+.quoteMark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  line-height: 0.5;
+  color: rgba(249,115,22,0.15);
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* animated center line */
+.visionLine {
+  height: 1.5px;
+  width: 0;
+  background: linear-gradient(90deg, transparent, #F97316, transparent);
+  margin: 0 auto 56px;
+  transition: width 1.2s 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.visionLineGrow {
+  width: 200px;
+}
+
+/* ── STATS ROW ── */
+.visionStats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(249,115,22,0.12);
+  padding: 20px 36px;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s 0.7s ease, transform 0.8s 0.7s ease;
+}
+
+.visionStatsVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vStat {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  padding: 0 28px;
 }
 
-.missionItem {
-  display: flex;
-  gap: 50px;
-  padding: 40px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Thin divider line */
-  transition: all 0.5s ease;
-}
-
-.missionItem:last-child {
-    border-bottom: none;
-}
-
-.missionNumber {
-  font-size: 18px;
-  font-weight: 800;
-  color: #ABAA57;
-  font-family: 'Inter', sans-serif;
-  padding-top: 5px;
-}
-
-.missionContent {
-  flex: 1;
-}
-
-.pointTitle {
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
+.vStatNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: #F8FAFC;
+  line-height: 1;
   letter-spacing: 1px;
 }
 
-.pointDescription {
-  font-size: 18px;
-  line-height: 1.7;
-  color: #b0b0b0;
+.vStatNum em {
+  font-style: normal;
+  color: #F97316;
+  font-size: 22px;
+}
+
+.vStatLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(248,250,252,0.25);
+  font-weight: 500;
+}
+
+.vStatBar {
+  width: 1px;
+  height: 36px;
+  background: rgba(249,115,22,0.15);
+}
+
+/* ══════════════════════════════════
+   MISSION SECTION — LIGHT PREMIUM
+══════════════════════════════════ */
+
+.missionSection {
+  background: #F8FAFC;
+  padding: 120px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* dot grid */
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(10,37,64,0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+.missionInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── MISSION HEADER ── */
+.missionHeader {
+  margin-bottom: 64px;
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1),
+              transform 0.9s cubic-bezier(0.4,0,0.2,1);
+}
+
+.missionHeaderVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mEyebrowLine {
+  width: 32px;
+  height: 2px;
+  background: #F97316;
+}
+
+.mEyebrowText {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #F97316;
+  font-weight: 500;
+}
+
+.missionHeading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 8vw, 110px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: 1px;
+  color: #0A2540;
+  margin: 0 0 18px;
+}
+
+.missionHeading span {
+  color: #F97316;
+  position: relative;
+  display: inline-block;
+}
+
+/* underline draw */
+.missionHeading span::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 4px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.missionHeaderVisible .missionHeading span::after {
+  transform: scaleX(1);
+}
+
+.missionSub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
   font-weight: 300;
-  max-width: 800px;
+  color: #64748b;
+  max-width: 460px;
+  line-height: 1.8;
+  margin: 0;
 }
 
-/* --- HOVER EFFECT: TEXT FOCUS --- */
-.missionItem:hover .pointTitle {
-    color: #ABAA57;
-    transform: translateX(10px);
+/* ── CARDS WRAP — 5 cards horizontal layout ── */
+.cardsWrap {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
 }
 
-.missionItem:hover .pointDescription {
-    color: #fff;
+/* ── MISSION CARD ── */
+.mCard {
+  position: relative;
+  background: #fff;
+  border: 1px solid rgba(10,37,64,0.07);
+  padding: 32px 24px 28px;
+  overflow: hidden;
+  cursor: default;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+    transform 0.7s cubic-bezier(0.4,0,0.2,1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.missionItem:hover {
-    background: rgba(171, 170, 87, 0.03); /* Extremely subtle glow on row hover */
-    padding-left: 20px;
+.mCardVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* --- ANIMATIONS --- */
-.section {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s ease;
+.mCard:hover,
+.mCardActive {
+  border-color: rgba(249,115,22,0.3);
+  box-shadow: 0 16px 48px rgba(10,37,64,0.08);
 }
 
-.show {
-    opacity: 1;
-    transform: translateY(0);
+/* top bar */
+.mCardBar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 1024px) {
-  .visionText { font-size: 32px; }
-  .missionItem { gap: 30px; }
+.mCard:hover .mCardBar,
+.mCardActive .mCardBar {
+  transform: scaleX(1);
 }
 
-@media (max-width: 600px) {
-  .visionText { font-size: 24px; }
-  .missionItem { flex-direction: column; gap: 10px; padding: 30px 0; }
-  .pointTitle { font-size: 18px; }
-  .pointDescription { font-size: 15px; }
+/* icon + num row */
+.mCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.mCardIcon {
+  color: #F97316;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.mCard:hover .mCardIcon,
+.mCardActive .mCardIcon {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+.mCardNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: rgba(10,37,64,0.15);
+  transition: color 0.3s;
+}
+
+.mCard:hover .mCardNum,
+.mCardActive .mCardNum {
+  color: #F97316;
+}
+
+/* divider expand */
+.mCardDivider {
+  width: 32px;
+  height: 1.5px;
+  background: rgba(10,37,64,0.08);
+  margin-bottom: 16px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+.mCard:hover .mCardDivider,
+.mCardActive .mCardDivider {
+  width: 56px;
+  background: #F97316;
+}
+
+/* title */
+.mCardTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: #0A2540;
+  margin: 0 0 10px;
+  line-height: 1.15;
+  transition: color 0.3s;
+}
+
+.mCard:hover .mCardTitle,
+.mCardActive .mCardTitle {
+  color: #0A2540;
+}
+
+/* desc */
+.mCardDesc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #64748b;
+  margin: 0 0 18px;
+  transition: color 0.3s;
+}
+
+.mCard:hover .mCardDesc,
+.mCardActive .mCardDesc {
+  color: #475569;
+}
+
+/* progress */
+.mCardProgress {
+  height: 1.5px;
+  background: rgba(10,37,64,0.05);
+  overflow: hidden;
+}
+
+.mCardProgressFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #F97316, rgba(249,115,22,0.3));
+  transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.mCard:hover .mCardProgressFill,
+.mCardActive .mCardProgressFill {
+  width: 100%;
+}
+
+/* watermark */
+.mCardWatermark {
+  position: absolute;
+  bottom: -16px; right: -8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px;
+  color: rgba(10,37,64,0.03);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: color 0.4s;
+}
+
+.mCard:hover .mCardWatermark {
+  color: rgba(249,115,22,0.04);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(1.6); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .cardsWrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .visionSection { padding: 90px 16px; }
+  .missionSection { padding: 80px 16px; }
+  .visionStats { padding: 16px 20px; }
+  .vStat { padding: 0 16px; }
+  .cardsWrap { grid-template-columns: repeat(2, 1fr); }
+  .missionHeading { font-size: 60px; }
+  .visionQuote { font-size: clamp(20px, 5vw, 32px); }
+}
+
+@media (max-width: 480px) {
+  .cardsWrap { grid-template-columns: 1fr; }
+  .visionStats {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .vStatBar {
+    width: 80px; height: 1px;
+    background: rgba(249,115,22,0.12);
+  }
+  .missionHeading { font-size: 52px; }
 }

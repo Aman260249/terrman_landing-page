@@ -1,176 +1,376 @@
-.chooseUsSection {
-    position: relative;
-    padding: 140px 6%;
-    background-color: #050505;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
+/* ============================================
+   WHY CHOOSE US — Pro Level Motion
+   Colors: #0A2540 · #F97316 · #F8FAFC
+   ============================================ */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap'); */
+
+.section {
+  padding: 140px 24px;
+  background: #F8FAFC;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
 
-.sectionBackground {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(171, 170, 87, 0.05) 0%, transparent 70%);
-    pointer-events: none;
+/* dot grid texture */
+.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(10,37,64,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
 }
 
-.contentWrapper {
-    position: relative;
-    z-index: 5;
-    max-width: 1400px;
-    margin: 0 auto;
+/* diagonal bg stripe */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -10%;
+  width: 55%; height: 200%;
+  background: linear-gradient(135deg, rgba(10,37,64,0.025) 0%, transparent 60%);
+  transform: skewX(-8deg);
+  pointer-events: none;
 }
 
-.headerBox {
-    margin-bottom: 100px;
-    text-align: center;
+/* ── HEADER ── */
+.header {
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1),
+              transform 0.9s cubic-bezier(0.4,0,0.2,1);
 }
 
-.mainHeading {
-    font-size: clamp(36px, 8vw, 84px);
-    font-weight: 900;
-    letter-spacing: -2px;
-    line-height: 1;
-    opacity: 0;
-    transform: translateY(30px);
+.headerVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.highlight {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.subHeader {
-    color: #ABAA57;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-top: 15px;
+.eyebrowLine {
+  width: 40px;
+  height: 1.5px;
+  background: #F97316;
+  opacity: 0.6;
 }
 
-.animatedText {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.8s ease;
+.eyebrowText {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #F97316;
+  font-weight: 500;
 }
 
-/* --- CARDS GRID --- */
-.cardsGrid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
+.heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 1px;
+  color: #0A2540;
+  margin: 0 0 20px;
 }
 
-.cardBox {
-    position: relative;
-    width: 380px;
-    height: 480px;
-    background: linear-gradient(145deg, #111 0%, #080808 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 50px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    opacity: 0;
-    transform: translateY(50px);
-    overflow: hidden;
+.heading span {
+  color: #F97316;
+  position: relative;
+  display: inline-block;
 }
 
-.cardBox.animated {
-    opacity: 1;
-    transform: translateY(0);
+/* underline draw animation */
+.heading span::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 3px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s 0.8s cubic-bezier(0.4,0,0.2,1);
 }
 
-.cardNumber {
-    font-size: 14px;
-    font-weight: 800;
-    color: #ABAA57;
-    display: block;
-    margin-bottom: 15px;
+.headerVisible .heading span::after {
+  transform: scaleX(1);
 }
 
-.topLine {
-    width: 40px;
-    height: 2px;
-    background: #ABAA57;
+.subheading {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #64748b;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── CARD ── */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(10,37,64,0.07);
+  padding: 40px 36px 36px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+    transform 0.7s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* card2 offset — original layout preserved */
+.card2 { transform: translateY(50px); }
+.cardVisible.card2 { transform: translateY(40px); }
+
+.card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 24px 60px rgba(10,37,64,0.1);
+  border-color: rgba(249,115,22,0.25);
+}
+
+.active {
+  transform: scale(1.04) !important;
+  z-index: 5;
+  box-shadow: 0 30px 80px rgba(10,37,64,0.15) !important;
+  border-color: #F97316 !important;
+}
+
+/* top bar draw */
+.cardTopBar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: #F97316;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.card:hover .cardTopBar,
+.active .cardTopBar {
+  transform: scaleX(1);
+}
+
+/* meta row */
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(10,37,64,0.2);
+  transition: color 0.3s;
+}
+
+.card:hover .number,
+.active .number { color: #F97316; }
+
+.tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #F97316;
+  border: 1px solid rgba(249,115,22,0.3);
+  padding: 3px 10px;
+  font-weight: 500;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.card:hover .tag,
+.active .tag {
+  background: rgba(249,115,22,0.06);
+  border-color: rgba(249,115,22,0.5);
+}
+
+/* metric */
+.metric {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.metricNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  color: #0A2540;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.card:hover .metricNum,
+.active .metricNum { color: #F97316; }
+
+.metricLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 500;
+  padding-bottom: 6px;
+}
+
+/* divider line expand */
+.divider {
+  width: 40px;
+  height: 2px;
+  background: rgba(10,37,64,0.08);
+  margin-bottom: 20px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+.card:hover .divider,
+.active .divider {
+  width: 70px;
+  background: #F97316;
 }
 
 .cardTitle {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: #0A2540;
+  margin: 0 0 12px;
+  line-height: 1.15;
 }
 
-.cardSubTitle {
-    font-size: 16px;
-    color: #888;
-    line-height: 1.7;
+.cardDesc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #64748b;
+  margin: 0 0 24px;
+  transition: color 0.3s;
 }
 
-/* --- THE BUTTON (THE FIX) --- */
-.viewContentBtn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 25px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(171, 170, 87, 0.3);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 2px;
-    z-index: 10; /* Ensures clickability */
-    transition: all 0.4s ease;
+.card:hover .cardDesc { color: #475569; }
+
+/* CTA */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(249,115,22,0.4);
+  text-decoration: none;
+  transition: color 0.3s, gap 0.3s;
 }
 
-.btnIcon svg {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.4s ease;
+.card:hover .btn,
+.active .btn {
+  color: #F97316;
+  gap: 12px;
 }
 
-/* --- HOVER MAGIC --- */
-.cardBox:hover {
-    transform: translateY(-15px) scale(1.02);
-    border-color: rgba(171, 170, 87, 0.4);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+.btn svg { transition: transform 0.3s ease; }
+
+.card:hover .btn svg,
+.active .btn svg { transform: translateX(4px); }
+
+/* watermark bg number */
+.watermark {
+  position: absolute;
+  bottom: -20px; right: -10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  color: rgba(10,37,64,0.03);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: color 0.4s;
 }
 
-.cardBox:hover .cardGlow {
-    opacity: 1;
+.card:hover .watermark { color: rgba(249,115,22,0.05); }
+
+/* bottom strip */
+.bottomStrip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 64px;
+  position: relative;
+  z-index: 1;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(10,37,64,0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s 0.7s ease, transform 0.8s 0.7s ease;
 }
 
-.viewContentBtn:hover {
-    background: #ABAA57;
-    color: #000;
-    border-color: #ABAA57;
+.bottomStripVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.viewContentBtn:hover .btnIcon svg {
-    transform: translateX(5px);
+.stripDot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #F97316;
+  opacity: 0.4;
 }
 
-/* Background Glow behind content */
-.cardGlow {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: #ABAA57;
-    filter: blur(120px);
-    border-radius: 50%;
-    top: -50px;
-    right: -50px;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; max-width: 560px; }
+  .card2 { transform: translateY(50px); }
+  .cardVisible.card2 { transform: translateY(0); }
+  .card:hover { transform: translateY(-8px) !important; }
 }
 
-/* --- RESPONSIVE --- */
 @media (max-width: 600px) {
-    .cardBox { width: 100%; height: auto; padding: 40px 30px; }
-    .mainHeading { font-size: 40px; }
-}   
+  .section { padding: 80px 16px; }
+  .heading { font-size: 52px; }
+  .metricNum { font-size: 44px; }
+  .card { padding: 28px 24px; }
+}

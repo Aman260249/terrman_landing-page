@@ -1,131 +1,517 @@
-.approachSection {
-  background: #050505;
-  padding: 140px 6%;
-  font-family: 'Inter', sans-serif;
-  color: #fff;
+/* ============================================
+   OUR APPROACH — Cinematic Premium
+   Colors: #0A2540 · #F97316 · #F8FAFC
+   Font: Bebas Neue + DM Sans
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+/* ── SECTION ── */
+.section {
+  position: relative;
+  padding: 140px 24px;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* ── VIDEO BACKGROUND ── */
+.videoWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.videoWrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── OVERLAY — dark blue tinted ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(10, 37, 64, 0.92) 0%,
+      rgba(10, 37, 64, 0.75) 40%,
+      rgba(10, 37, 64, 0.80) 70%,
+      rgba(10, 37, 64, 0.95) 100%
+    );
+}
+
+/* ── NOISE TEXTURE ── */
+.noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+
+/* grid lines */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(rgba(249, 115, 22, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+
+/* ── CONTAINER ── */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ══════════════════════
+   LEFT COLUMN
+══════════════════════ */
+.left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leftVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* eyebrow */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F97316;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.eyebrowText {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #F97316;
+  font-weight: 500;
+}
+
+/* ── BIG HEADING ── */
+.heading {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 28px;
+  line-height: 0.88;
+}
+
+.headingLine1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 10vw, 130px);
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: rgba(248, 250, 252, 0.18);
+
+  /* clip text effect */
+  -webkit-text-stroke: 1px rgba(248, 250, 252, 0.25);
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s 0.2s ease, transform 0.8s 0.2s ease;
+}
+
+.leftVisible .headingLine1 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.headingLine2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 10vw, 130px);
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: #F8FAFC;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s 0.35s ease, transform 0.8s 0.35s ease;
+}
+
+.leftVisible .headingLine2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* accent on APPROACH */
+.headingLine2 {
+  position: relative;
+  display: inline-block;
+}
+
+.headingLine2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  height: 4px;
+  width: 0;
+  background: #F97316;
+  transition: width 1s 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leftVisible .headingLine2::after {
+  width: 100%;
+}
+
+/* desc text */
+.text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(248, 250, 252, 0.55);
+  max-width: 380px;
+  margin: 0 0 32px;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s 0.5s ease, transform 0.8s 0.5s ease;
+}
+
+.leftVisible .text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* accent line grow */
+.accentLine {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F97316, rgba(249, 115, 22, 0));
+  margin-bottom: 36px;
+  transition: width 1.2s 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accentLineGrow {
+  width: 120px;
+}
+
+/* step counter */
+.stepCounter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  padding: 12px 20px;
+
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s 0.8s ease, transform 0.8s 0.8s ease;
+}
+
+.leftVisible .stepCounter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stepNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: #F97316;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.stepLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.35);
+  font-weight: 500;
+}
+
+/* ══════════════════════
+   RIGHT — CARDS
+══════════════════════ */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ── CARD ── */
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 28px 28px 28px 0;
+  border-bottom: 1px solid rgba(248, 250, 252, 0.06);
+  overflow: hidden;
+  cursor: default;
+
+  opacity: 0;
+  transform: translateX(40px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* hover state */
+.card:hover,
+.cardHovered {
+  background: rgba(248, 250, 252, 0.03);
+}
+
+/* left fill on hover */
+.cardFill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #F97316;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .cardFill,
+.cardHovered .cardFill {
+  transform: scaleY(1);
+}
+
+/* ── NUMBER COL ── */
+.numCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px 0 20px;
+  flex-shrink: 0;
+}
+
+.number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: rgba(249, 115, 22, 0.3);
+  transition: color 0.3s;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.card:hover .number,
+.cardHovered .number {
+  color: #F97316;
+}
+
+.numLine {
+  width: 1px;
+  height: 28px;
+  background: rgba(249, 115, 22, 0.15);
+  transition: background 0.3s, height 0.3s;
+}
+
+.card:hover .numLine,
+.cardHovered .numLine {
+  background: rgba(249, 115, 22, 0.4);
+  height: 40px;
+}
+
+/* ── CARD CONTENT ── */
+.cardContent {
+  flex: 1;
+  padding-left: 8px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: #F8FAFC;
+  line-height: 1.1;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+.card:hover .cardTitle,
+.cardHovered .cardTitle {
+  color: #ffffff;
+}
+
+.cardTag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #F97316;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.card:hover .cardTag,
+.cardHovered .cardTag {
+  background: rgba(249, 115, 22, 0.08);
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+.cardDesc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(248, 250, 252, 0.4);
+  margin: 0 0 14px;
+  transition: color 0.3s;
+}
+
+.card:hover .cardDesc,
+.cardHovered .cardDesc {
+  color: rgba(248, 250, 252, 0.65);
+}
+
+/* progress bar */
+.progressBar {
+  height: 1px;
+  background: rgba(248, 250, 252, 0.06);
   overflow: hidden;
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr; /* Asymmetric grid */
-  gap: 100px;
-  align-items: flex-start;
+.progressFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #F97316, rgba(249, 115, 22, 0.3));
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- LEFT SIDE --- */
-.stickySide {
-  position: sticky;
-  top: 150px;
+.card:hover .progressFill,
+.cardHovered .progressFill {
+  width: 100%;
 }
 
-.label {
-  font-size: 12px;
-  letter-spacing: 6px;
-  color: #ABAA57;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  display: block;
+/* ── CARD ARROW ── */
+.cardArrow {
+  flex-shrink: 0;
+  padding-left: 20px;
+  color: rgba(249, 115, 22, 0.25);
+  transition: color 0.3s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mainHeading {
-  font-size: clamp(50px, 6vw, 90px);
-  font-weight: 900;
-  line-height: 0.85;
-  margin-bottom: 30px;
+.card:hover .cardArrow,
+.cardHovered .cardArrow {
+  color: #F97316;
+  transform: translateX(6px);
 }
 
-.gold {
-  color: #fff;
-  -webkit-text-stroke: 1px #ABAA57; /* Outline effect */
+/* ── ANIMATIONS ── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.6); }
 }
 
-.introText {
-  font-size: 18px;
-  color: #888;
-  line-height: 1.6;
-  max-width: 400px;
-}
-
-.accentLine {
-  width: 100px;
-  height: 2px;
-  background: #ABAA57;
-  margin-top: 40px;
-}
-
-/* --- RIGHT SIDE: STEP CARDS --- */
-.stepsSide {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-}
-
-.stepCard {
-  position: relative;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.02);
-  border-left: 2px solid rgba(171, 170, 87, 0.3);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.bgNumber {
-  position: absolute;
-  top: -30px;
-  right: 20px;
-  font-size: 120px;
-  font-weight: 900;
-  color: rgba(171, 170, 87, 0.05); /* Very subtle giant number */
-  line-height: 1;
-  z-index: 0;
-  transition: color 0.4s ease;
-}
-
-.stepContent {
-  position: relative;
-  z-index: 1;
-}
-
-.stepTitle {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #efefef;
-}
-
-.stepDesc {
-  font-size: 17px;
-  color: #999;
-  line-height: 1.7;
-  max-width: 500px;
-}
-
-/* --- HOVER MAGIC --- */
-.stepCard:hover {
-  background: rgba(171, 170, 87, 0.05);
-  border-left-color: #ABAA57;
-  transform: translateX(20px);
-}
-
-.stepCard:hover .bgNumber {
-  color: rgba(171, 170, 87, 0.15); /* Number becomes clearer on hover */
-}
-
-.stepCard:hover .stepTitle {
-  color: #ABAA57;
-}
-
-/* --- RESPONSIVE --- */
+/* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .container { grid-template-columns: 1fr; gap: 60px; }
-  .stickySide { position: relative; top: 0; }
-  .mainHeading { font-size: 60px; }
+  .container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .left {
+    transform: translateY(40px);
+  }
+
+  .leftVisible {
+    transform: translateY(0);
+  }
+
+  .headingLine1,
+  .headingLine2 {
+    font-size: clamp(64px, 14vw, 100px);
+  }
+
+  .card {
+    transform: translateY(30px);
+  }
+
+  .cardVisible {
+    transform: translateY(0);
+  }
 }
 
-@media (max-width: 600px) {
-  .stepCard:hover { transform: none; }
-  .bgNumber { font-size: 80px; }
-  .stepTitle { font-size: 22px; }
+@media (max-width: 768px) {
+  .section {
+    padding: 100px 16px;
+  }
+
+  .headingLine1,
+  .headingLine2 {
+    font-size: clamp(56px, 16vw, 88px);
+  }
+
+  .cardTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .cardTitle {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headingLine1,
+  .headingLine2 {
+    font-size: 56px;
+    letter-spacing: 2px;
+  }
+
+  .numCol {
+    padding: 0 16px 0 14px;
+  }
+
+  .card {
+    padding: 22px 16px 22px 0;
+  }
 }

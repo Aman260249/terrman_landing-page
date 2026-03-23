@@ -81,7 +81,7 @@ import WhyChooseUsSection from './components/WhyChooseUsSection';
 import EngineeringServices from './components/EngineeringServices';
 import ContactFormSection from './components/ContactFormSection';
 import FooterSection from './components/FooterSection';
-
+// import ServiceCards from "./components/ServiceCards";
 
 // import SloganBlock from './components/SloganBlock';
 
@@ -103,6 +103,7 @@ export default function Home() {
       <OurApproach />
       <WhyChooseUsSection />
       < EngineeringServices />
+      {/* < ServiceCards/> */}
       < ContactFormSection />
       {/* < FooterSection /> */}
       
